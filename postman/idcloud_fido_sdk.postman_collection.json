@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "53d20297-a575-426e-9d8f-c89dadb85fe5",
+		"name": "idcloud_fido_sdk",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SCS",
+			"item": [
+				{
+					"name": "Enrollment Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a03c1105-727e-44ad-9911-033e5f850c64",
+								"exec": [
+									"let response = pm.response.json();",
+									"let enrollmentToken = response.state.result.object.enrollmentToken;",
+									"pm.environment.set(\"enrollmentToken\", enrollmentToken);",
+									"",
+									"let clientId = response.state.result.object.clientId;",
+									"pm.environment.set(\"clientId\", clientId);",
+									"",
+									"let scenarioId = response.id;",
+									"pm.environment.set(\"scenarioId\", scenarioId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "83493be8-1ad4-4938-a752-83780bfb4b81",
+								"exec": [
+									"const randomName = pm.variables.replaceIn(\"{{$guid}}\");",
+									"pm.environment.set(\"randomName\", randomName);",
+									"console.log(randomName);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{scsApiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\"\n    },\n    \"name\": \"MS_FIDO2_Enrollment\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
+							"protocol": "https",
+							"host": [
+								"{{scsUrl}}"
+							],
+							"path": [
+								"scs",
+								"v1",
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c05a84bc-970f-4a56-b5c3-1bedc26324c6",
+								"exec": [
+									"let response = pm.response.json();",
+									"let scenarioId = response.id;",
+									"pm.environment.set(\"scenarioId\", scenarioId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{scsApiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\"\n    },\n    \"name\": \"MS_FIDO2_Authentication\"\n}"
+						},
+						"url": {
+							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
+							"protocol": "https",
+							"host": [
+								"{{scsUrl}}"
+							],
+							"path": [
+								"scs",
+								"v1",
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Result",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{scsApiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{scsUrl}}/scs/v1/scenarios/{{scenarioId}}",
+							"protocol": "https",
+							"host": [
+								"{{scsUrl}}"
+							],
+							"path": [
+								"scs",
+								"v1",
+								"scenarios",
+								"{{scenarioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QR Code Generation",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{enrollmentToken}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"qrserver",
+								"com"
+							],
+							"path": [
+								"v1",
+								"create-qr-code",
+								""
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "150x150"
+								},
+								{
+									"key": "data",
+									"value": "{{enrollmentToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{scsBearerToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "74ebe0e0-8243-4eb6-bc71-26924a6d4a26",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cad83590-e030-4618-8bb7-538fd1adddba",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
