@@ -99,3 +99,6 @@ iOSInjectionProject/
 
 ## Ignore DS_Store ##
 **/.DS_Store
+
+## Ignore lib folder ##
+lib/*/**
