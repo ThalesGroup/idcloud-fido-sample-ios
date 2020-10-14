@@ -1,0 +1,75 @@
+/* 
+  Localizable.strings
+  idcloudclientsample
+  
+*/
+
+// MARK: Common
+
+"alert_error_title" = "Error";
+"alert_ok" = "OK";
+
+
+// MARK: Enroll
+
+"enroll_button_title" = "Enroll";
+"enroll_instruction" = "Please generate a QR code on Postman prior to enrollment.";
+"enroll_alert_title" = "Enrollment";
+"enroll_alert_message" = "You have been successfully enrolled.";
+
+
+// MARK: Authenticate
+
+"authenticate_button_title" = "Authenticate";
+"authenticate_instruction" = "Please generate an Authentication event on Postman prior to authentication.";
+"authenticate_alert_title" = "Authentication";
+"authenticate_alert_message" = "You have been successfully authenticated.";
+
+
+// MARK: TabBar
+
+"home_tabbar_title" = "Home";
+"authenticators_tabbar_title" = "Authenticators";
+
+
+// MARK: Unenroll
+
+"unenroll_button_title" = "Unenroll";
+"unenroll_alert_title" = "Unenroll";
+"unenroll_alert_message" = "You have been unenrolled.";
+
+
+// MARK: Authenticators
+
+"authenticators_title" = "Authenticators";
+"edit_button_title" = "Edit";
+"cancel_button_title" = "Cancel";
+"biometric_authenticator_title" = "Biometric Authenticator";
+"pin_authenticator_title" = "PIN Authenticator";
+"actionsheet_cancel" = "Cancel";
+"actionsheet_change_pin" = "Change PIN";
+
+// MARK: Add Authenticator
+
+"addauthenticator_alert_title" = "Add Authenticator";
+"addauthenticator_alert_message" = "You have successfully added a new authenticator.";
+
+// MARK: Remove Authenticator
+
+"removeauthenticator_alert_title" = "Remove Authenticator";
+"removeauthenticator_alert_message" = "Your authenticator has been removed.";
+
+// MARK: Change PIN
+
+"changepin_alert_title" = "Change PIN";
+"changepin_alert_message" = "Your PIN has been updated.";
+
+
+// MARK: Progress
+
+"progress_start" = "Executing";
+"progress_sending_request" = "Sending request";
+"progress_retrieving_request" = "Retrieving request";
+"progress_processing_request" = "Processing request";
+"progress_validating_authentication" = "Validating authentication";
+"progress_end" = "Done";

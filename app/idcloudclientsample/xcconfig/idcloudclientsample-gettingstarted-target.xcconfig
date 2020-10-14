@@ -1,0 +1,12 @@
+//
+//  idcloudclientsample-gettingstarted.xcconfig
+//  idcloudclientsample
+//
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "../Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) GETTING_STARTED
