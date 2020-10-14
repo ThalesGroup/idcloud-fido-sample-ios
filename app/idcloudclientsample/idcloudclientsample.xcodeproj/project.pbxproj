@@ -45,7 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0720F259E3A0A56D4F0DA0AE /* Pods-GettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.release.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 		115374C7251887FE007BBA01 /* GettingStarted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GettingStarted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		115374C9251887FE007BBA01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		115374D225188801007BBA01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,10 +64,12 @@
 		11537584251AEEAD007BBA01 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		11537588251AEEF9007BBA01 /* AuthenticatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorsViewController.swift; sourceTree = "<group>"; };
 		1153758C251AF399007BBA01 /* ActivatedAuthenticators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatedAuthenticators.swift; sourceTree = "<group>"; };
-		1C2B89FE41CB38921F239243 /* Pods-Advanced.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.debug.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.debug.xcconfig"; sourceTree = "<group>"; };
-		6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
+		74741A19CC47AE84914AF1A1 /* Pods-Advanced.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.debug.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.debug.xcconfig"; sourceTree = "<group>"; };
+		769A1129DE1EC1A014E3B34F /* Pods-GettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.release.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 		97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Advanced.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12775FF252C436900ACABE8 /* SecureLogArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureLogArchive.swift; sourceTree = "<group>"; };
+		B6EA8A46BE0A7E266662F751 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
+		BB87A4A51638BD93C45B3983 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 		D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D923FC6D251BAACD00841F46 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		D944A901251CF3D8002D6293 /* idcloudclientsample-gettingstarted-target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "idcloudclientsample-gettingstarted-target.xcconfig"; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		D953E64B251FA2AC00A11D1B /* SamplePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePersistence.swift; sourceTree = "<group>"; };
 		D97B8694251BACC300FE7A82 /* QRScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		D9F4773C25218A9F00A6D071 /* ProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHud.swift; sourceTree = "<group>"; };
-		E034DBD4249BD1E09869CE03 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,7 @@
 				D968C6DC2524E49D008AEEE6 /* idcloudclientsample */,
 				115374A925185800007BBA01 /* Products */,
 				1153753E25199620007BBA01 /* Frameworks */,
-				3C4B5C5C2157077BD4E6FFD6 /* Pods */,
+				FE3F39F4816D1131DF5A0672 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,17 +203,6 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
-		3C4B5C5C2157077BD4E6FFD6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1C2B89FE41CB38921F239243 /* Pods-Advanced.debug.xcconfig */,
-				6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */,
-				E034DBD4249BD1E09869CE03 /* Pods-GettingStarted.debug.xcconfig */,
-				0720F259E3A0A56D4F0DA0AE /* Pods-GettingStarted.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		D968C6DC2524E49D008AEEE6 /* idcloudclientsample */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +226,18 @@
 				D97B8694251BACC300FE7A82 /* QRScannerViewController.swift */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		FE3F39F4816D1131DF5A0672 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74741A19CC47AE84914AF1A1 /* Pods-Advanced.debug.xcconfig */,
+				B6EA8A46BE0A7E266662F751 /* Pods-Advanced.release.xcconfig */,
+				BB87A4A51638BD93C45B3983 /* Pods-GettingStarted.debug.xcconfig */,
+				769A1129DE1EC1A014E3B34F /* Pods-GettingStarted.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
