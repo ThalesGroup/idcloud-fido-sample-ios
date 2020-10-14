@@ -7,7 +7,7 @@ import UIKit
 import IdCloudClient
 import IdCloudClientUi
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?

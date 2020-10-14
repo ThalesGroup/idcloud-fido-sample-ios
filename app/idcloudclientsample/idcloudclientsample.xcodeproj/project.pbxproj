@@ -236,7 +236,6 @@
 				BB87A4A51638BD93C45B3983 /* Pods-GettingStarted.debug.xcconfig */,
 				769A1129DE1EC1A014E3B34F /* Pods-GettingStarted.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

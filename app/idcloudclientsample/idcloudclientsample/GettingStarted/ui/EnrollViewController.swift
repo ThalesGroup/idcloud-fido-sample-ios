@@ -122,14 +122,14 @@ class EnrollViewController: UIViewController {
             // (2) the pre-configured URL
             // (3) the uiDelegates
             self?.enrollObj = Enroll(code: code!, url: URL, uiDelegates: clientConformer)
-            self?.enrollObj.execute { (progress) in
+            self?.enrollObj.execute(progress: { (progress) in
                 if let aView = self?.view {
                     ProgressHud.showProgress(forView: aView, progress: progress)
                 }
-            } completion: { (anError) in
+            }, completion: { (anError) in
                 error = anError
                 self?.semaphore.signal()
-            }
+            })
             self?.semaphore.wait()
 
             DispatchQueue.main.async {

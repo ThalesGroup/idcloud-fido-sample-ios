@@ -34,14 +34,14 @@ class AddAuthenticator : NSObject {
         
         // Create an instance of the Add authenticator request.
         // Instances of requests should be held as an instance variable to ensure that completion callbacks will function as expected and to prevent unexpected behaviour.
-        request = idcloudclient.createAddAuthenticatorRequest(with: idcUiDelegates) { (progress) in
+        request = idcloudclient.createAddAuthenticatorRequest(with: idcUiDelegates, progress: { (progress) in
             // Refer to IDCProgress for corresponding callbacks which provide an update to the existing request execution.
             progressClosure(progress)
-        } completion: { (response, error) in
+        }, completion: { (response, error) in
             // Callback to the UI.
             // These are executed on the Main thread.
             completion(error as NSError?)
-        }
+        })
         
         // Execute the request.
         // Requests on IdClouf FIDO SDK are executed on the own unique threads.

@@ -91,11 +91,11 @@ class AuthenticateViewController: UIViewController {
         // (1) the pre-configured URL
         // (2) the uiDelegates
         authenticateObj = Authenticate(url: URL, uiDelegates: clientConformer)
-        authenticateObj.execute { [weak self] (progress) in
+        authenticateObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
             }
-        } completion: { [weak self] (error) in
+        }, completion: { [weak self] (error) in
             // Remove all views displayed by the IdCloud FIDO UI SDK.
             self?.navigationController?.popToRootViewController(animated: true)
             
@@ -105,7 +105,7 @@ class AuthenticateViewController: UIViewController {
             } else {
                 self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
             }
-        }
+        })
     }
     
     

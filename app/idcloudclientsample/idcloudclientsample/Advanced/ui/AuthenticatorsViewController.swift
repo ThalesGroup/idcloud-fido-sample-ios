@@ -63,11 +63,11 @@ class AuthenticatorsViewController: UIViewController {
         // (1) the pre-configured URL
         // (2) the uiDelegates
         addAuthenticatorObj = AddAuthenticator(url: URL, uiDelegates: clientConformer)
-        addAuthenticatorObj.execute { [weak self] (progress) in
+        addAuthenticatorObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
             }
-        } completion: { [weak self] (error) in
+        }, completion: { [weak self] (error) in
             // Remove all views displayed by the IdCloud FIDO UI SDK.
             self?.navigationController?.popToRootViewController(animated: true)
             
@@ -80,7 +80,7 @@ class AuthenticatorsViewController: UIViewController {
             } else {
                 self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
             }
-        }
+        })
     }
     
     @objc internal func edit(_ button: UIBarButtonItem) {
@@ -102,11 +102,11 @@ class AuthenticatorsViewController: UIViewController {
         // (1) the pre-configured URL
         // (2) the authenticaor to be removed
         removeAuthenticatorObj = RemoveAuthenticator(url: URL, authenticator: authenticator)
-        removeAuthenticatorObj.execute { [weak self] (progress) in
+        removeAuthenticatorObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
             }
-        } completion: {  [weak self] (error) in
+        }, completion: {  [weak self] (error) in
             // Remove all views displayed by the IdCloud FIDO UI SDK.
             self?.navigationController?.popToRootViewController(animated: true)
             
@@ -120,7 +120,7 @@ class AuthenticatorsViewController: UIViewController {
                     self?.refreshAuthenticatorsTable()
                 })
             }
-        }
+        })
     }
     
     private func changePin() {
@@ -130,11 +130,11 @@ class AuthenticatorsViewController: UIViewController {
         // (1) the pre-configured URL
         // (2) the pinPadUiDelegate
         changePinObj = ChangePin(url: URL, pinPadUiDelegate: clientConformer as IDCSecurePinPadUiDelegate)
-        changePinObj.execute { [weak self] (progress) in
+        changePinObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
             }
-        } completion: { [weak self] (error) in
+        }, completion: { [weak self] (error) in
             // Remove all views displayed by the IdCloud FIDO UI SDK.
             self?.navigationController?.popToRootViewController(animated: true)
             
@@ -145,7 +145,7 @@ class AuthenticatorsViewController: UIViewController {
             } else {
                 self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
             }
-        }
+        })
     }
     
     // MARK: Helper Methods
