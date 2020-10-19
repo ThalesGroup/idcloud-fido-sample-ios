@@ -9,7 +9,7 @@
 			"name": "SCS",
 			"item": [
 				{
-					"name": "Enrollment Token",
+					"name": "Enrollment",
 					"event": [
 						{
 							"listen": "test",
