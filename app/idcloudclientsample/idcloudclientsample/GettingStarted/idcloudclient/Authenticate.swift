@@ -29,19 +29,20 @@ class Authenticate : NSObject {
         // Required callbacks are essential to ensure a proper UX behaviour.
         // As a means of convenience, the IdCloud FIDO UI SDK provides a ClientConformer class which conforms to all necessary delegates of IdCloud FIDO SDK
         /* 1 */
-        
-        
+        ## Insert enrollment credential creation ##
+
         
         // Create an instance of the Fetch request.
         // Instances of requests should be held as an instance variable to ensure that completion callbacks will function as expected and to prevent unexpected behaviour.
         /* 2 */
-        
-        
+        ## Create necessary request ##
+
         
         // Execute the request.
         // Requests on IdClouf FIDO SDK are executed on the own unique threads.
         // Ensure that an Authentication scenario was previously invoked. Otherwise, an Error will be returned when no actionable events are present.
         /* 3 */
+        ## Execute request ##
         
         
     }
