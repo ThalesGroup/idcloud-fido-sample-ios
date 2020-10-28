@@ -83,6 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Configure SecureLog
         let config = SecureLogConfig { (slComps) in
+            slComps.fileID = "sample"
+
             //Set Mandatory parameters
             slComps.publicKeyModulus = NSData(bytes: SecureLogPublicKey.publicKeyModulus, length:SecureLogPublicKey.publicKeyModulus.count) as Data
             slComps.publicKeyExponent = NSData(bytes: SecureLogPublicKey.publicKeyExponent, length: SecureLogPublicKey.publicKeyExponent.count) as Data

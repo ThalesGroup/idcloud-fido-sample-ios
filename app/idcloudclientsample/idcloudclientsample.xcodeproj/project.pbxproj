@@ -17,9 +17,7 @@
 		11537560251A0012007BBA01 /* AuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153755F251A0012007BBA01 /* AuthenticateViewController.swift */; };
 		11537561251A0012007BBA01 /* AuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153755F251A0012007BBA01 /* AuthenticateViewController.swift */; };
 		11537565251A0199007BBA01 /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537564251A0199007BBA01 /* Enroll.swift */; };
-		11537566251A0199007BBA01 /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537564251A0199007BBA01 /* Enroll.swift */; };
 		1153756A251A01A7007BBA01 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537569251A01A7007BBA01 /* Authenticate.swift */; };
-		1153756B251A01A7007BBA01 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537569251A01A7007BBA01 /* Authenticate.swift */; };
 		11537573251AEDD9007BBA01 /* ChangePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537572251AEDD9007BBA01 /* ChangePin.swift */; };
 		11537577251AEDF5007BBA01 /* AddAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537576251AEDF5007BBA01 /* AddAuthenticator.swift */; };
 		1153757B251AEE03007BBA01 /* RemoveAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153757A251AEE03007BBA01 /* RemoveAuthenticator.swift */; };
@@ -31,6 +29,8 @@
 		90C4E4AD0D48C2AD4794A89D /* Pods_Advanced.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */; };
 		A1277600252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
 		A1277601252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
+		D91F74CD2547163D00CA4BBE /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91F74CB2547163D00CA4BBE /* Authenticate.swift */; };
+		D91F74CE2547163D00CA4BBE /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91F74CC2547163D00CA4BBE /* Enroll.swift */; };
 		D923FC6E251BAACD00841F46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D923FC6D251BAACD00841F46 /* Localizable.strings */; };
 		D923FC6F251BAACD00841F46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D923FC6D251BAACD00841F46 /* Localizable.strings */; };
 		D953E63C251F8B0C00A11D1B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953E63B251F8B0C00A11D1B /* Configuration.swift */; };
@@ -71,6 +71,8 @@
 		B6EA8A46BE0A7E266662F751 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
 		BB87A4A51638BD93C45B3983 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 		D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D91F74CB2547163D00CA4BBE /* Authenticate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
+		D91F74CC2547163D00CA4BBE /* Enroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enroll.swift; sourceTree = "<group>"; };
 		D923FC6D251BAACD00841F46 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		D944A901251CF3D8002D6293 /* idcloudclientsample-gettingstarted-target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "idcloudclientsample-gettingstarted-target.xcconfig"; sourceTree = "<group>"; };
 		D944A902251CF3F3002D6293 /* idcloudclientsample-advanced-target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "idcloudclientsample-advanced-target.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,8 @@
 		11537570251AED7D007BBA01 /* idcloudclient */ = {
 			isa = PBXGroup;
 			children = (
+				D91F74CC2547163D00CA4BBE /* Enroll.swift */,
+				D91F74CB2547163D00CA4BBE /* Authenticate.swift */,
 				11537576251AEDF5007BBA01 /* AddAuthenticator.swift */,
 				11537572251AEDD9007BBA01 /* ChangePin.swift */,
 				1153757A251AEE03007BBA01 /* RemoveAuthenticator.swift */,
@@ -450,10 +454,10 @@
 				1153758D251AF399007BBA01 /* ActivatedAuthenticators.swift in Sources */,
 				11537561251A0012007BBA01 /* AuthenticateViewController.swift in Sources */,
 				1153757B251AEE03007BBA01 /* RemoveAuthenticator.swift in Sources */,
-				11537566251A0199007BBA01 /* Enroll.swift in Sources */,
-				1153756B251A01A7007BBA01 /* Authenticate.swift in Sources */,
 				11537581251AEE12007BBA01 /* Unenroll.swift in Sources */,
 				11537589251AEEF9007BBA01 /* AuthenticatorsViewController.swift in Sources */,
+				D91F74CD2547163D00CA4BBE /* Authenticate.swift in Sources */,
+				D91F74CE2547163D00CA4BBE /* Enroll.swift in Sources */,
 				D953E64D251FA2AC00A11D1B /* SamplePersistence.swift in Sources */,
 				A1277601252C436900ACABE8 /* SecureLogArchive.swift in Sources */,
 				1153750025188B54007BBA01 /* AppDelegate.swift in Sources */,
@@ -630,7 +634,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/Advanced/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -653,7 +657,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/Advanced/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
