@@ -39,7 +39,7 @@ class Authenticate : NSObject {
 
         
         // Execute the request.
-        // Requests on IdClouf FIDO SDK are executed on the own unique threads.
+        // Requests on IdCloud FIDO SDK are executed on the own unique threads.
         // Ensure that an Authentication scenario was previously invoked. Otherwise, an Error will be returned when no actionable events are present.
         /* 3 */
         ## Execute request ##

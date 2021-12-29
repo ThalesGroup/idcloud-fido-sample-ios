@@ -6,11 +6,24 @@
 import Foundation
 import IdCloudClient
 
-class Enroll : NSObject {
+class Enroll: NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
     typealias CompletionClosure = (NSError?) -> ()
+    
+    private var _enrollmentToken: IDCEnrollmentToken?
+    var enrollmentToken: IDCEnrollmentToken! {
+        set {
+            if _enrollmentToken == nil {
+                // Ignore incoming value
+                _enrollmentToken = newValue
+            }
+        }
+        get {
+            return _enrollmentToken
+        }
+    }
 
-    private let code: String
+    internal let code: String
     private let uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate
     
     // Set up an instance variable of IDCIdCloudClient
@@ -26,10 +39,9 @@ class Enroll : NSObject {
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
-        
         // Initialize an instance of IDCEnrollmentToken from its corresponding Factory.
         // Instances of IDCEnrollmentToken are initialized with a code retrieved from the Bank via a QR code (i.e. or other means) and is simply encoded as a UTF8 data.
-        let enrollmentToken = IDCEnrollmentTokenFactory.createEnrollmentToken(code.data(using: .utf8)!)
+        enrollmentToken = IDCEnrollmentTokenFactory.createEnrollmentToken(code.data(using: .utf8)!)
         
         // Set up an instance of IDCUiDelegates, an encapsulated class containing all necessary UI delegates required by IdCloud FIDO SDK.
         // Ensure that you conform to these corresponding delegates.
@@ -44,16 +56,17 @@ class Enroll : NSObject {
         // Instances of requests should be held as an instance variable to ensure that completion callbacks will function as expected and to prevent unexpected behaviour.
         request = idcloudclient.createEnrollRequest(with: enrollmentToken,
                                                     uiDelegates: idcUiDelegates, progress: { (progress) in
-                                                        // Refer to IDCProgress for corresponding callbacks which provide an update to the existing request execution.
-                                                        progressClosure(progress)
-                                                    }, completion: { (response, error) in
-                                                        // Callback to the UI.
-                                                        // These are executed on the Main thread.
-                                                        completion(error as NSError?)
-                                                    })
+            // Refer to IDCProgress for corresponding callbacks which provide an update to the existing request execution.
+            progressClosure(progress)
+        }, completion: { [weak self] (response, error) in
+            // Callback to the UI.
+            // These are executed on the Main thread.
+            self?.enrollmentToken.wipe()
+            completion(error as NSError?)
+        })
         
         // Execute the request.
-        // Requests on IdClouf FIDO SDK are executed on the own unique threads.
+        // Requests on IdCloud FIDO SDK are executed on the own unique threads.
         request.execute()
     }
 }

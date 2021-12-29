@@ -92,28 +92,22 @@ class EnrollViewController: UIViewController {
         // A dispatch semaphore pattern is used to enable a simple chaining of interdependent
         // asynchronous calls.
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            var code: String?
+            var qrCode: String?
             var error: NSError?
             var qrVC: QRScannerViewController!
             
             DispatchQueue.main.async {
                 // For convenience, a QR Scanner is provided to retrieve the enrollmentToken.
                 qrVC = QRScannerViewController { (aCode) in
-                    code = aCode
+                    qrCode = aCode
                     self?.semaphore.signal()
                 }
                 self?.present(qrVC, animated: true, completion: nil)
             }
             self?.semaphore.wait()
             
-            DispatchQueue.main.async {
-                qrVC.dismiss(animated: true) {
-                    self?.semaphore.signal()
-                }
-            }
-            self?.semaphore.wait()
-            
-            guard let clientConformer = self?.clientConformer else {
+            guard let clientConformer = self?.clientConformer,
+                  let enrollmentToken = qrCode else {
                 return
             }
             
@@ -121,7 +115,12 @@ class EnrollViewController: UIViewController {
             // (1) the retrieved code
             // (2) the pre-configured URL
             // (3) the uiDelegates
-            self?.enrollObj = Enroll(code: code!, url: URL, uiDelegates: clientConformer)
+#if GETTING_STARTED
+            self?.enrollObj = Enroll(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+#elseif ADVANCED
+            self?.enrollObj = EnrollWithPush(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+#endif
+
             self?.enrollObj.execute(progress: { (progress) in
                 if let aView = self?.view {
                     ProgressHud.showProgress(forView: aView, progress: progress)

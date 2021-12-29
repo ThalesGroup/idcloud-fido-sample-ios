@@ -6,11 +6,24 @@
 import Foundation
 import IdCloudClient
 
-class Enroll : NSObject {
+class Enroll: NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
     typealias CompletionClosure = (NSError?) -> ()
+    
+    private var _enrollmentToken: IDCEnrollmentToken?
+    var enrollmentToken: IDCEnrollmentToken! {
+        set {
+            if _enrollmentToken == nil {
+                // Ignore incoming value
+                _enrollmentToken = newValue
+            }
+        }
+        get {
+            return _enrollmentToken
+        }
+    }
 
-    private let code: String
+    internal let code: String
     private let uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate
     
     // Set up an instance variable of IDCIdCloudClient
