@@ -9,31 +9,22 @@
 // IdCloud FIDO SDK does not support bitcode
 ENABLE_BITCODE = NO
 
-// IdCloud FIDO SDK minimum iOS is 11.0
-IPHONEOS_DEPLOYMENT_TARGET = 11.0
+// IdCloud FIDO SDK minimum iOS is 12.0
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
 
-// The following search paths is based on this folder structure. 
+// The following search paths is based on this folder structure.
 // Please modify accordingly if the structure is different.
 //    ├── app
 //    │   └── idcloudclientsample
 //    └── lib
 //        ├── idcloudclient
 //        │   ├── debug
-//        │   │   ├── idcloudclient
-//        │   │   └── libidcloudclient.a
+//        │   │   └── idcloudclient.xcframework
 //        │   └── release
-//        │       ├── idcloudclient
-//        │       └── libidcloudclient.a
+//        │   │   └── idcloudclient.xcframework
 //        └── idcloudclientui
 //            ├── idcloudclientui
 //            └── idcloudclientui.xcodeproj
-
-// Add IdCloud FIDO SDK Headers to search path
-HEADER_SEARCH_PATHS = $(inherited) $(PROJECT_DIR)/../../lib/idcloudclient/$(CONFIGURATION)
-
-// Link IdCloud FIDO SDK binary
-LIBRARY_SEARCH_PATHS = $(inherited) $(PROJECT_DIR)/../../lib/idcloudclient/$(CONFIGURATION)
-OTHER_LDFLAGS = $(inherited) -lidcloudclient
 
 DEAD_CODE_STRIPPING = YES
 DEPLOYMENT_POSTPROCESSING = YES
@@ -41,3 +32,6 @@ GCC_GENERATE_DEBUGGING_SYMBOLS = NO
 STRIP_INSTALLED_PRODUCT = YES
 STRIP_STYLE = all
 COPY_PHASE_STRIP = YES
+
+OTHER_LDFLAGS = $(inherited) -lidcloudclient
+LIB_PATH = $(PROJECT_DIR)/../../lib
