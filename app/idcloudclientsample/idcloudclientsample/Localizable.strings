@@ -8,7 +8,8 @@
 
 "alert_error_title" = "Error";
 "alert_ok" = "OK";
-
+"alert_proceed" = "Proceed";
+"alert_cancel" = "Cancel";
 
 // MARK: Enroll
 
@@ -18,26 +19,33 @@
 "enroll_alert_message" = "You have been successfully enrolled.";
 
 
-// MARK: Authenticate
+// MARK: Authenticate/Sign
 
 "authenticate_button_title" = "Authenticate";
-"authenticate_instruction" = "Please generate an Authentication event on Postman prior to authentication.";
+"authenticate_instruction" = "Please generate an Authentication/Sign event on Postman prior to authentication.";
 "authenticate_alert_title" = "Authentication";
 "authenticate_alert_message" = "You have been successfully authenticated.";
 
+"sign_alert_title" = "Transaction Details";
+"sign_alert_message_default" = "Failed to parse transaction details.";
+"sign_alert_message: date %@ amount %@ from %@ to %@" = "
+Please confirm the following operation:
+
+%@
+Transfer %@ from %@ to %@.
+";
 
 // MARK: TabBar
 
 "home_tabbar_title" = "Home";
 "authenticators_tabbar_title" = "Authenticators";
-
+"settings_tabbar_title" = "Settings";
 
 // MARK: Unenroll
 
 "unenroll_button_title" = "Unenroll";
 "unenroll_alert_title" = "Unenroll";
 "unenroll_alert_message" = "You have been unenrolled.";
-
 
 // MARK: Authenticators
 
@@ -64,6 +72,11 @@
 "changepin_alert_title" = "Change PIN";
 "changepin_alert_message" = "Your PIN has been updated.";
 
+// MARK: Refresh Push Token
+
+"refresh_push_title" = "Refresh Push Token";
+"refresh_push_fail" = "Failed to refresh device push token.";
+"refresh_push_success" = "You have successfully refreshed the device push token";
 
 // MARK: Progress
 
@@ -73,3 +86,10 @@
 "progress_processing_request" = "Processing request";
 "progress_validating_authentication" = "Validating authentication";
 "progress_end" = "Done";
+
+// MARK: Settings
+
+"settings_title" = "Settings";
+"version_title" = "Version";
+"push_notifications_title" = "Push Notifications";
+"enable_push_notification_from_settings_error" = "Ensure that Push Notifications are enabled via the System Settings";

@@ -45,11 +45,15 @@ class QRScannerViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
         if captureSession.isRunning {
             captureSession.stopRunning()
         }
+        super.viewWillDisappear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        completionHandler?(qrString)
+        super.viewDidDisappear(animated)
     }
         
     
@@ -111,6 +115,6 @@ extension QRScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
         }
         qrCodeFrameView.frame = barCodeObject.bounds
         qrString = metadataObj.stringValue
-        completionHandler?(qrString)
+        dismiss(animated: true)
     }
 }
