@@ -6,24 +6,28 @@
 import UIKit
 import IdCloudClientUi
 import SSZipArchive
+import IdCloudClient
 
 class MainViewController: UIViewController {
     private let authenticateButton: UIButton = UIButton(type: .system)
     private let descriptionLabel: UILabel = UILabel()
     private var authenticateObj: Authenticate!
     private var unenrollObj: Unenroll!
+    private var processNotificationObj: ProcessNotification!
     private var secureLogObj : SecureLogArchive!
     
     // IdCloud FIDO UI SDK provides a conformer to the necessary delegates of IdCloud FIDO SDK
     // providing integrators with a convenient way of exploring the use-cases available.
-    let clientConformer = ClientConformer()
+    // This sample further extends the feature provided by the IdCloud FIDO UI SDK to customize the displays even further.
+    let clientConformer = CustomAppClientConformer()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        //Init navigation bar to add action button for sending log files.
-        initNavBar()
-        
+        // Init navigation bar to add action button for sending log files.
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareLogFiles))
+        navigationItem.setRightBarButton(shareButton, animated: false)
+
         view.backgroundColor = UIColor.extBackground
         
         authenticateButton.setTitle(NSLocalizedString("authenticate_button_title", comment: ""), for: .normal)
@@ -53,11 +57,18 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func initNavBar() {
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareLogFiles))
-        navigationItem.setRightBarButton(shareButton, animated: false)
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.processNotification(_:)), name: PushNotificationConstants.didReceiveUserNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.processNotification(_:)), name: PushNotificationConstants.willPresentUserNotification, object: nil)
     }
-        
+    
+    public override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: PushNotificationConstants.didReceiveUserNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: PushNotificationConstants.willPresentUserNotification, object: nil)
+        super.viewWillDisappear(animated)
+    }
+ 
     // MARK: IBActions
     
     @objc internal func shareLogFiles(sender: AnyObject) {
@@ -86,9 +97,6 @@ class MainViewController: UIViewController {
        
         self.present(activityVC, animated: true, completion: nil)
     }
-    
-    
-    // MARK: IBActions
     
     @objc internal func authenticate(_ button: UIButton) {
         // Execute the authentication use-case.
@@ -122,7 +130,11 @@ class MainViewController: UIViewController {
         // Initialize an instance of the Unenroll use-case, providing
         // (1) the pre-configured URL
         unenrollObj = Unenroll(url: URL)
-        unenrollObj.execute { [weak self] (error) in
+        unenrollObj.execute(progress: { [weak self] (progress) in
+            if let aView = self?.view {
+                ProgressHud.showProgress(forView: aView, progress: progress)
+            }
+        }, completion: { [weak self] (error) in
             if error == nil {
                 SamplePersistence.setEnrolled(false)
                 self?.showAlert(withTitle: NSLocalizedString("unenroll_alert_title", comment: ""), message: NSLocalizedString("unenroll_alert_message", comment: "")) { (okAction) in
@@ -130,9 +142,43 @@ class MainViewController: UIViewController {
                     AppDelegate.switchWindowRootViewController(vc)
                 }
             } else {
+                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: { (okAction) in
+                    if error?.code == IDCError.userNotEnrolled.rawValue {
+                        let vc = AppDelegate.enrollViewHierarchy()
+                        AppDelegate.switchWindowRootViewController(vc)
+                    }
+                })
+            }
+        })
+    }
+    
+    @objc func processNotification(_ notification: Notification) {
+        // Execute the process notification use-case.
+        
+        // Retrieve the notification object from Notification
+        // This object is then passed to the IdCloud FIDO SDK for further processing.
+        // The SDK will then proceed to complete any pending scenarios.
+        let notificationObject = notification.object as! [AnyHashable : Any]
+        
+        // Initialize an instance of the ProcessNotification use-case, providing
+        // (1) the pre-configured URL
+        // (2) the uiDelegates
+        processNotificationObj = ProcessNotification(url: URL, uiDelegates: clientConformer)
+        processNotificationObj.execute(notification: notificationObject, progress: { [weak self] (progress) in
+            if let aView = self?.view {
+                ProgressHud.showProgress(forView: aView, progress: progress)
+            }
+        }, completion: { [weak self] (error) in
+            // Remove all views displayed by the IdCloud FIDO UI SDK.
+            self?.navigationController?.popToRootViewController(animated: true)
+            
+            if error == nil {
+                // Display the result of the use-case and proceed accordingly.
+                self?.showAlert(withTitle: NSLocalizedString("authenticate_alert_title", comment: ""), message: NSLocalizedString("authenticate_alert_message", comment: ""), okAction: nil)
+            } else {
                 self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
             }
-        }
+        })
     }
     
     // MARK: Convenience Methods

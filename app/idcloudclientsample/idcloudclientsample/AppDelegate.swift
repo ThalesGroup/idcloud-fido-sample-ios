@@ -9,12 +9,12 @@ import IdCloudClientUi
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     var idcloudclient: IDCIdCloudClient!
     var request: IDCUnenrollRequest!
-
+    
     var secureLog : SecureLog!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -34,12 +34,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         
+#if ADVANCED
+        UNUserNotificationCenter.current().delegate = self
+        if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable : Any] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                NotificationCenter.default.post(name: PushNotificationConstants.didReceiveUserNotification, object: userInfo)
+            }
+        }
+#endif
+        
         return true
     }
+}
+
+#if ADVANCED
+// MARK: Push Notification
+extension AppDelegate {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device Token: \(String(describing: token))")
+        NotificationCenter.default.post(name: PushNotificationConstants.didRegisterForRemoteNotificationsWithDeviceToken, object: token)
+    }
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register: \(error)")
+        NotificationCenter.default.post(name: PushNotificationConstants.didFailToRegisterForRemoteNotificationsWithError, object: nil)
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        NotificationCenter.default.post(name: PushNotificationConstants.didReceiveUserNotification, object: userInfo)
+        
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        NotificationCenter.default.post(name: PushNotificationConstants.willPresentUserNotification, object: userInfo)
+        
+        completionHandler(UNNotificationPresentationOptions(rawValue: 0))
+    }
+}
+#endif
+
+// MARK: Helper Methods
+extension AppDelegate {
     static func enrollViewHierarchy() -> UIViewController {
         let enrollNVC = UINavigationController(rootViewController: EnrollViewController())
         enrollNVC.navigationBar.isTranslucent = false
+        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .extBackground
+            enrollNVC.navigationBar.standardAppearance = appearance
+            enrollNVC.navigationBar.scrollEdgeAppearance = enrollNVC.navigationBar.standardAppearance
+        }
         return enrollNVC
     }
     
@@ -64,8 +118,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             vc.addChild(authenticatorsNVC)
             authenticatorsNVC.tabBarItem.image = #imageLiteral(resourceName: "lock_tabbar")
             authenticatorsNVC.tabBarItem.title = NSLocalizedString("authenticators_tabbar_title", comment: "")
+            
+            let settingsNVC = UINavigationController(rootViewController: SettingsViewController())
+            settingsNVC.navigationBar.isTranslucent = false
+            vc.addChild(settingsNVC)
+            settingsNVC.tabBarItem.image = #imageLiteral(resourceName: "settings")
+            settingsNVC.tabBarItem.title = NSLocalizedString("settings_tabbar_title", comment: "")
+            
+            if #available(iOS 13.0, *) {
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithOpaqueBackground()
+                vc.tabBar.standardAppearance = tabBarAppearance
+                
+#if compiler(>=5.5) // Use compiler check, 5.5 compiler is Xcode 13. So that code doesn't compile on older Xcode
+                if #available(iOS 15.0, *) {
+                    vc.tabBar.scrollEdgeAppearance = vc.tabBar.standardAppearance
+                }
+#endif
+            }
         }
 #endif
+        if #available(iOS 13.0, *) {
+            if let nvcs = vc.children as? [UINavigationController] {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = .extBackground
+                
+                for nvc in nvcs {
+                    nvc.navigationBar.standardAppearance = appearance
+                    nvc.navigationBar.scrollEdgeAppearance = nvc.navigationBar.standardAppearance
+                }
+            }
+        }
+        
         return vc
     }
     
@@ -84,7 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Configure SecureLog
         let config = SecureLogConfig { (slComps) in
             slComps.fileID = "sample"
-
+            
             //Set Mandatory parameters
             slComps.publicKeyModulus = NSData(bytes: SecureLogPublicKey.publicKeyModulus, length:SecureLogPublicKey.publicKeyModulus.count) as Data
             slComps.publicKeyExponent = NSData(bytes: SecureLogPublicKey.publicKeyExponent, length: SecureLogPublicKey.publicKeyExponent.count) as Data

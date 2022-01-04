@@ -29,10 +29,13 @@
 		90C4E4AD0D48C2AD4794A89D /* Pods_Advanced.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */; };
 		A1277600252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
 		A1277601252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
-		D91F74CD2547163D00CA4BBE /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91F74CB2547163D00CA4BBE /* Authenticate.swift */; };
-		D91F74CE2547163D00CA4BBE /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91F74CC2547163D00CA4BBE /* Enroll.swift */; };
+		D9004BE327664CC000B071AD /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9004BE227664CC000B071AD /* PushNotificationManager.swift */; };
 		D923FC6E251BAACD00841F46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D923FC6D251BAACD00841F46 /* Localizable.strings */; };
 		D923FC6F251BAACD00841F46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D923FC6D251BAACD00841F46 /* Localizable.strings */; };
+		D92ACF072766DFC500635615 /* EnrollWithPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92ACF062766DFC500635615 /* EnrollWithPush.swift */; };
+		D92ACF09276793D000635615 /* ProcessNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92ACF08276793D000635615 /* ProcessNotification.swift */; };
+		D92ACF0C27684D2400635615 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92ACF0B27684D2400635615 /* SettingsViewController.swift */; };
+		D92ACF0F2768D76200635615 /* RefreshPushToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92ACF0E2768D76100635615 /* RefreshPushToken.swift */; };
 		D953E63C251F8B0C00A11D1B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953E63B251F8B0C00A11D1B /* Configuration.swift */; };
 		D953E63F251F8B1400A11D1B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953E63B251F8B0C00A11D1B /* Configuration.swift */; };
 		D953E64C251FA2AC00A11D1B /* SamplePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953E64B251FA2AC00A11D1B /* SamplePersistence.swift */; };
@@ -40,11 +43,15 @@
 		D968C6E32524E4BF008AEEE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 115374D225188801007BBA01 /* Assets.xcassets */; };
 		D97B8695251BACC300FE7A82 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97B8694251BACC300FE7A82 /* QRScannerViewController.swift */; };
 		D97B8696251BACC300FE7A82 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97B8694251BACC300FE7A82 /* QRScannerViewController.swift */; };
+		D9947E07276F7327007F3459 /* CustomAppClientConformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9947E05276F731E007F3459 /* CustomAppClientConformer.swift */; };
+		D9F39B33277C072B00C87C48 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F39B31277C072B00C87C48 /* Authenticate.swift */; };
+		D9F39B34277C072B00C87C48 /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F39B32277C072B00C87C48 /* Enroll.swift */; };
 		D9F4773D25218A9F00A6D071 /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4773C25218A9F00A6D071 /* ProgressHud.swift */; };
 		D9F4773E25218A9F00A6D071 /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4773C25218A9F00A6D071 /* ProgressHud.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0720F259E3A0A56D4F0DA0AE /* Pods-GettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.release.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 		115374C7251887FE007BBA01 /* GettingStarted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GettingStarted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		115374C9251887FE007BBA01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		115374D225188801007BBA01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,23 +71,29 @@
 		11537584251AEEAD007BBA01 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		11537588251AEEF9007BBA01 /* AuthenticatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorsViewController.swift; sourceTree = "<group>"; };
 		1153758C251AF399007BBA01 /* ActivatedAuthenticators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatedAuthenticators.swift; sourceTree = "<group>"; };
-		74741A19CC47AE84914AF1A1 /* Pods-Advanced.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.debug.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.debug.xcconfig"; sourceTree = "<group>"; };
-		769A1129DE1EC1A014E3B34F /* Pods-GettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.release.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"; sourceTree = "<group>"; };
+		1C2B89FE41CB38921F239243 /* Pods-Advanced.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.debug.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.debug.xcconfig"; sourceTree = "<group>"; };
+		6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
 		97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Advanced.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12775FF252C436900ACABE8 /* SecureLogArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureLogArchive.swift; sourceTree = "<group>"; };
-		B6EA8A46BE0A7E266662F751 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
-		BB87A4A51638BD93C45B3983 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 		D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D91F74CB2547163D00CA4BBE /* Authenticate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
-		D91F74CC2547163D00CA4BBE /* Enroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enroll.swift; sourceTree = "<group>"; };
+		D9004BE227664CC000B071AD /* PushNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		D923FC6D251BAACD00841F46 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		D92ACF062766DFC500635615 /* EnrollWithPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollWithPush.swift; sourceTree = "<group>"; };
+		D92ACF08276793D000635615 /* ProcessNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessNotification.swift; sourceTree = "<group>"; };
+		D92ACF0B27684D2400635615 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D92ACF0E2768D76100635615 /* RefreshPushToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshPushToken.swift; sourceTree = "<group>"; };
 		D944A901251CF3D8002D6293 /* idcloudclientsample-gettingstarted-target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "idcloudclientsample-gettingstarted-target.xcconfig"; sourceTree = "<group>"; };
 		D944A902251CF3F3002D6293 /* idcloudclientsample-advanced-target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "idcloudclientsample-advanced-target.xcconfig"; sourceTree = "<group>"; };
 		D953E63B251F8B0C00A11D1B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D953E642251F983E00A11D1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D953E64B251FA2AC00A11D1B /* SamplePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePersistence.swift; sourceTree = "<group>"; };
 		D97B8694251BACC300FE7A82 /* QRScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
+		D9947E05276F731E007F3459 /* CustomAppClientConformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppClientConformer.swift; sourceTree = "<group>"; };
+		D9ABA4052587B7A900119525 /* Advanced.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Advanced.entitlements; sourceTree = "<group>"; };
+		D9F39B31277C072B00C87C48 /* Authenticate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
+		D9F39B32277C072B00C87C48 /* Enroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enroll.swift; sourceTree = "<group>"; };
 		D9F4773C25218A9F00A6D071 /* ProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHud.swift; sourceTree = "<group>"; };
+		E034DBD4249BD1E09869CE03 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,11 +121,12 @@
 		1153749F25185800007BBA01 = {
 			isa = PBXGroup;
 			children = (
+				D9ABA4052587B7A900119525 /* Advanced.entitlements */,
 				1153754825199B0C007BBA01 /* xcconfig */,
 				D968C6DC2524E49D008AEEE6 /* idcloudclientsample */,
 				115374A925185800007BBA01 /* Products */,
 				1153753E25199620007BBA01 /* Frameworks */,
-				FE3F39F4816D1131DF5A0672 /* Pods */,
+				3C4B5C5C2157077BD4E6FFD6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +152,8 @@
 		115374E225188849007BBA01 /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
+				D9004BE227664CC000B071AD /* PushNotificationManager.swift */,
+				D9947E05276F731E007F3459 /* CustomAppClientConformer.swift */,
 				11537570251AED7D007BBA01 /* idcloudclient */,
 				11537571251AED7D007BBA01 /* ui */,
 				D953E642251F983E00A11D1B /* Info.plist */,
@@ -187,11 +203,14 @@
 		11537570251AED7D007BBA01 /* idcloudclient */ = {
 			isa = PBXGroup;
 			children = (
-				D91F74CC2547163D00CA4BBE /* Enroll.swift */,
-				D91F74CB2547163D00CA4BBE /* Authenticate.swift */,
+				D9F39B32277C072B00C87C48 /* Enroll.swift */,
+				D92ACF062766DFC500635615 /* EnrollWithPush.swift */,
+				D9F39B31277C072B00C87C48 /* Authenticate.swift */,
 				11537576251AEDF5007BBA01 /* AddAuthenticator.swift */,
 				11537572251AEDD9007BBA01 /* ChangePin.swift */,
 				1153757A251AEE03007BBA01 /* RemoveAuthenticator.swift */,
+				D92ACF08276793D000635615 /* ProcessNotification.swift */,
+				D92ACF0E2768D76100635615 /* RefreshPushToken.swift */,
 				11537580251AEE12007BBA01 /* Unenroll.swift */,
 				1153758C251AF399007BBA01 /* ActivatedAuthenticators.swift */,
 			);
@@ -203,8 +222,20 @@
 			children = (
 				11537584251AEEAD007BBA01 /* MainViewController.swift */,
 				11537588251AEEF9007BBA01 /* AuthenticatorsViewController.swift */,
+				D92ACF0B27684D2400635615 /* SettingsViewController.swift */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		3C4B5C5C2157077BD4E6FFD6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C2B89FE41CB38921F239243 /* Pods-Advanced.debug.xcconfig */,
+				6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */,
+				E034DBD4249BD1E09869CE03 /* Pods-GettingStarted.debug.xcconfig */,
+				0720F259E3A0A56D4F0DA0AE /* Pods-GettingStarted.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		D968C6DC2524E49D008AEEE6 /* idcloudclientsample */ = {
@@ -232,17 +263,6 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
-		FE3F39F4816D1131DF5A0672 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				74741A19CC47AE84914AF1A1 /* Pods-Advanced.debug.xcconfig */,
-				B6EA8A46BE0A7E266662F751 /* Pods-Advanced.release.xcconfig */,
-				BB87A4A51638BD93C45B3983 /* Pods-GettingStarted.debug.xcconfig */,
-				769A1129DE1EC1A014E3B34F /* Pods-GettingStarted.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -251,6 +271,7 @@
 			buildConfigurationList = 115374D825188801007BBA01 /* Build configuration list for PBXNativeTarget "GettingStarted" */;
 			buildPhases = (
 				9A0D1AFC17EE6AD28ACF6E3B /* [CP] Check Pods Manifest.lock */,
+				D9D6206F25B0A7F300B122C8 /* [IdCloudClient] Copy Artifacts */,
 				115374C3251887FE007BBA01 /* Sources */,
 				115374C4251887FE007BBA01 /* Frameworks */,
 				115374C5251887FE007BBA01 /* Resources */,
@@ -270,6 +291,7 @@
 			buildConfigurationList = 115374F22518884D007BBA01 /* Build configuration list for PBXNativeTarget "Advanced" */;
 			buildPhases = (
 				E6E0D810F7538D30A6719CF0 /* [CP] Check Pods Manifest.lock */,
+				D9D6207625B0A84200B122C8 /* [IdCloudClient] Copy Artifacts */,
 				115374DD25188849007BBA01 /* Sources */,
 				115374DE25188849007BBA01 /* Frameworks */,
 				115374DF25188849007BBA01 /* Resources */,
@@ -381,6 +403,42 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D9D6206F25B0A7F300B122C8 /* [IdCloudClient] Copy Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[IdCloudClient] Copy Artifacts";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./copy_artifacts.sh\n";
+		};
+		D9D6207625B0A84200B122C8 /* [IdCloudClient] Copy Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[IdCloudClient] Copy Artifacts";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./copy_artifacts.sh\n";
+		};
 		E6E0D810F7538D30A6719CF0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -446,20 +504,26 @@
 			files = (
 				11537585251AEEAD007BBA01 /* MainViewController.swift in Sources */,
 				D97B8696251BACC300FE7A82 /* QRScannerViewController.swift in Sources */,
+				D92ACF0C27684D2400635615 /* SettingsViewController.swift in Sources */,
+				D92ACF09276793D000635615 /* ProcessNotification.swift in Sources */,
 				D953E63F251F8B1400A11D1B /* Configuration.swift in Sources */,
 				11537577251AEDF5007BBA01 /* AddAuthenticator.swift in Sources */,
 				11537573251AEDD9007BBA01 /* ChangePin.swift in Sources */,
 				D9F4773E25218A9F00A6D071 /* ProgressHud.swift in Sources */,
+				D9004BE327664CC000B071AD /* PushNotificationManager.swift in Sources */,
+				D92ACF0F2768D76200635615 /* RefreshPushToken.swift in Sources */,
 				1153755A2519FFFF007BBA01 /* EnrollViewController.swift in Sources */,
 				1153758D251AF399007BBA01 /* ActivatedAuthenticators.swift in Sources */,
 				11537561251A0012007BBA01 /* AuthenticateViewController.swift in Sources */,
+				D92ACF072766DFC500635615 /* EnrollWithPush.swift in Sources */,
 				1153757B251AEE03007BBA01 /* RemoveAuthenticator.swift in Sources */,
 				11537581251AEE12007BBA01 /* Unenroll.swift in Sources */,
 				11537589251AEEF9007BBA01 /* AuthenticatorsViewController.swift in Sources */,
-				D91F74CD2547163D00CA4BBE /* Authenticate.swift in Sources */,
-				D91F74CE2547163D00CA4BBE /* Enroll.swift in Sources */,
 				D953E64D251FA2AC00A11D1B /* SamplePersistence.swift in Sources */,
+				D9F39B33277C072B00C87C48 /* Authenticate.swift in Sources */,
 				A1277601252C436900ACABE8 /* SecureLogArchive.swift in Sources */,
+				D9F39B34277C072B00C87C48 /* Enroll.swift in Sources */,
+				D9947E07276F7327007F3459 /* CustomAppClientConformer.swift in Sources */,
 				1153750025188B54007BBA01 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -589,17 +653,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 202111090941;
+				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/GettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.gettingstarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -611,17 +678,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 202111090941;
+				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/GettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.gettingstarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -633,16 +703,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Advanced.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202111090941;
 				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/Advanced/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.advanced;
+				MARKETING_VERSION = 2.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -655,17 +727,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Advanced.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202111090941;
 				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/Advanced/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.advanced;
+				MARKETING_VERSION = 2.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
