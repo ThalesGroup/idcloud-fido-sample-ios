@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "53d20297-a575-426e-9d8f-c89dadb85fe5",
-		"name": "idcloud_fido_sdk",
+		"_postman_id": "0a39e761-7023-41fd-88c7-736f5d54895c",
+		"name": "IdCloud FIDO Demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -14,7 +14,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a03c1105-727e-44ad-9911-033e5f850c64",
 								"exec": [
 									"let response = pm.response.json();",
 									"let enrollmentToken = response.state.result.object.enrollmentToken;",
@@ -32,7 +31,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "83493be8-1ad4-4938-a752-83780bfb4b81",
 								"exec": [
 									"const randomName = pm.variables.replaceIn(\"{{$guid}}\");",
 									"pm.environment.set(\"randomName\", randomName);",
@@ -52,66 +50,14 @@
 								"value": "application/json"
 							},
 							{
-								"key": "x-api-key",
-								"value": "{{scsApiKey}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\"\n    },\n    \"name\": \"MS_FIDO2_Enrollment\"\n}",
-							"options": {
-								"raw": {}
-							}
-						},
-						"url": {
-							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
-							"protocol": "https",
-							"host": [
-								"{{scsUrl}}"
-							],
-							"path": [
-								"scs",
-								"v1",
-								"scenarios"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Authentication",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "c05a84bc-970f-4a56-b5c3-1bedc26324c6",
-								"exec": [
-									"let response = pm.response.json();",
-									"let scenarioId = response.id;",
-									"pm.environment.set(\"scenarioId\", scenarioId);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
+								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
-							},
-							{
-								"key": "x-api-key",
-								"value": "{{scsApiKey}}",
-								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\"\n    },\n    \"name\": \"MS_FIDO2_Authentication\"\n}"
+							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\"\n    },\n    \"name\": \"Enroll_FIDO2\"\n}"
 						},
 						"url": {
 							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
@@ -123,39 +69,6 @@
 								"scs",
 								"v1",
 								"scenarios"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Result",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "x-api-key",
-								"value": "{{scsApiKey}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{scsUrl}}/scs/v1/scenarios/{{scenarioId}}",
-							"protocol": "https",
-							"host": [
-								"{{scsUrl}}"
-							],
-							"path": [
-								"scs",
-								"v1",
-								"scenarios",
-								"{{scenarioId}}"
 							]
 						}
 					},
@@ -195,6 +108,199 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"let scenarioId = response.id;",
+									"pm.environment.set(\"scenarioId\", scenarioId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\",\n        \"pushNotificationMessage\": {\n            \"title\": \"Authentication Request\",\n            \"body\": \"An authentication request was made.\"\n        }\n    },\n    \"name\": \"Auth_FIDO2\"\n}"
+						},
+						"url": {
+							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
+							"protocol": "https",
+							"host": [
+								"{{scsUrl}}"
+							],
+							"path": [
+								"scs",
+								"v1",
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"let scenarioId = response.id;",
+									"pm.environment.set(\"scenarioId\", scenarioId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\",\n        \"transactionData\": [\n            {\n                \"name\": \"soybeans\"\n            },\n            {\n                \"px\": \"10.32\"\n            },\n            {\n                \"qty\": \"230\"\n            }\n        ]\n    },\n    \"name\": \"Sign_FIDO2\"\n}"
+						},
+						"url": {
+							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
+							"protocol": "https",
+							"host": [
+								"{{scsUrl}}"
+							],
+							"path": [
+								"scs",
+								"v1",
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sample App Sign",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"let scenarioId = response.id;",
+									"pm.environment.set(\"scenarioId\", scenarioId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var timestamp = new Date();\r",
+									"var moment = require(\"moment\")\r",
+									"var timestampString = moment(timestamp).valueOf();\r",
+									"pm.environment.set(\"currentTimestamp\", timestampString);\r",
+									"console.log(timestampString);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\",\n        \"transactionData\": [\n            {\n                \"date\": \"{{currentTimestamp}}\"\n            },\n            {\n                \"operation\": \"transfer\"\n            },\n            {\n                \"amount\": \"{{$randomInt}}.25\"\n            },\n            {\n                \"currency\": \"{{$randomCurrencyCode}}\"\n            },\n            {\n                \"from\": \"{{$randomFirstName}}\"\n            },\n            {\n                \"to\": \"{{$randomFirstName}}\"\n            }\n        ]\n    },\n    \"name\": \"Sign_FIDO2\"\n}"
+						},
+						"url": {
+							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
+							"protocol": "https",
+							"host": [
+								"{{scsUrl}}"
+							],
+							"path": [
+								"scs",
+								"v1",
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Result",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{scsUrl}}/scs/v1/scenarios/{{scenarioId}}",
+							"protocol": "https",
+							"host": [
+								"{{scsUrl}}"
+							],
+							"path": [
+								"scs",
+								"v1",
+								"scenarios",
+								"{{scenarioId}}"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -211,7 +317,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "74ebe0e0-8243-4eb6-bc71-26924a6d4a26",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -221,16 +326,13 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cad83590-e030-4618-8bb7-538fd1adddba",
 						"type": "text/javascript",
 						"exec": [
 							""
 						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
