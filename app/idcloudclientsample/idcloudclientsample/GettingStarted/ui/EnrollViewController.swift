@@ -46,7 +46,18 @@ class EnrollViewController: UIViewController {
             }
         }
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleUserActivityEnroll(_:)), name: AppLinksConstants.didContinueUserActivity, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: AppLinksConstants.didContinueUserActivity, object: nil)
+        super.viewWillDisappear(animated)
+    }
+
     private func initNavBar() {
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareLogFiles))
         navigationItem.setRightBarButton(shareButton, animated: false)
@@ -84,7 +95,7 @@ class EnrollViewController: UIViewController {
         
     
     // MARK: IBActions
-    
+
     @objc internal func enroll(_ button: UIButton) {
         // Execute the enrollment use-case.
         // Ensure that this use-case is first initiated on the server to have a QR code ready.
@@ -132,40 +143,61 @@ class EnrollViewController: UIViewController {
             self?.semaphore.wait()
 
             DispatchQueue.main.async {
-                // Remove all views displayed by the IdCloud FIDO UI SDK.
-                self?.navigationController?.popToRootViewController(animated: true)
-
-                if error == nil {
-                    // A simple caching mecahnism for future app cycles to determine if the user was
-                    // previously enrolled.
-                    // This should be properly managed and stored.
-                    SamplePersistence.setEnrolled(true)
-                                        
-                    // Display the result of the use-case and proceed accoridngly.
-                    self?.showAlert(withTitle: NSLocalizedString("enroll_alert_title", comment: ""), message: NSLocalizedString("enroll_alert_message", comment: ""), okAction: { (action) in
-                        self?.showSuccessFlow()
-                    })
-                } else {
-                    self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
-                }
+                self?.completeEnrollment(error: error)
             }
         }
     }
-    
-    
-    // MARK: Convenience Methods
-    
-    private func showAlert(withTitle title: String, message: String, okAction: ((UIAlertAction) -> Void)?) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("alert_ok", comment: ""), style: .default, handler: okAction))
-        navigationController?.present(alertController, animated: true, completion: nil)
+
+    @objc internal func handleUserActivityEnroll(_ notification: Notification) {
+        guard let enrollmentToken = notification.object as? String,
+              !SamplePersistence.isEnrolled else {
+            return
+        }
+        // Initialize an instance of the Enroll use-case, providing
+        // (1) the retrieved code
+        // (2) the pre-configured URL
+        // (3) the uiDelegates
+#if GETTING_STARTED
+        enrollObj = Enroll(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+#elseif ADVANCED
+        enrollObj = EnrollWithPush(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+#endif
+
+        enrollObj.execute(progress: { [weak self] (progress) in
+            if let aView = self?.view {
+                ProgressHud.showProgress(forView: aView, progress: progress)
+            }
+        }, completion: { [weak self] (error) in
+            self?.completeEnrollment(error: error)
+        })
     }
+
+    // MARK: Convenience Methods
     
     private func showSuccessFlow() {
         let vc = AppDelegate.mainViewHierarchy()
         AppDelegate.switchWindowRootViewController(vc)
+    }
+
+    private func completeEnrollment(error: NSError?) {
+        // Remove all views displayed by the IdCloud FIDO UI SDK.
+        navigationController?.popViewController(animated: true)
+        if error == nil {
+            // A simple caching mecahnism for future app cycles to determine if the user was
+            // previously enrolled.
+            // This should be properly managed and stored.
+            SamplePersistence.setEnrolled(true)
+
+            // Display the result of the use-case and proceed accoridngly.
+            UIAlertController.showToast(viewController: navigationController,
+                                        title: NSLocalizedString("enroll_alert_title", comment: ""),
+                                        message: NSLocalizedString("enroll_alert_message", comment: "")) { [weak self] in
+                self?.showSuccessFlow()
+            }
+        } else {
+            UIAlertController.showErrorAlert(viewController: navigationController,
+                                             error: error!)
+        }
     }
     
     // MARK: Layout
