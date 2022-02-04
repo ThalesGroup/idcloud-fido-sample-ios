@@ -76,9 +76,12 @@ class AuthenticatorsViewController: UIViewController {
                 self?.refreshAuthenticatorsTable()
                 
                 // Display the result of the use-case and proceed accoridngly.
-                self?.showAlert(withTitle: NSLocalizedString("addauthenticator_alert_title", comment: ""), message: NSLocalizedString("addauthenticator_alert_message", comment: ""), okAction: nil)
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("addauthenticator_alert_title", comment: ""),
+                                            message: NSLocalizedString("addauthenticator_alert_message", comment: ""))
             } else {
-                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
+                UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: error!)
             }
         })
     }
@@ -111,14 +114,16 @@ class AuthenticatorsViewController: UIViewController {
             self?.navigationController?.popToRootViewController(animated: true)
             
             if error == nil {
-                
                 // Display the result of the use-case and proceed accoridngly.
-                self?.showAlert(withTitle: NSLocalizedString("removeauthenticator_alert_title", comment: ""), message: NSLocalizedString("removeauthenticator_alert_message", comment: ""), okAction: nil)
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("removeauthenticator_alert_title", comment: ""),
+                                            message: NSLocalizedString("removeauthenticator_alert_message", comment: ""))
             } else {
-                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: { (action) in
+                UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: error!) { (okAction) in
                     // Refresh Authenticators table view
                     self?.refreshAuthenticatorsTable()
-                })
+                }
             }
         })
     }
@@ -140,10 +145,12 @@ class AuthenticatorsViewController: UIViewController {
             
             if error == nil {
                 // Display the result of the use-case and proceed accoridngly.
-                self?.showAlert(withTitle: NSLocalizedString("changepin_alert_title", comment: ""), message: NSLocalizedString("changepin_alert_message", comment: ""), okAction: nil)
-                
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("changepin_alert_title", comment: ""),
+                                            message: NSLocalizedString("changepin_alert_message", comment: ""))
             } else {
-                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
+                UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: error!)
             }
         })
     }
@@ -165,15 +172,6 @@ class AuthenticatorsViewController: UIViewController {
         }
         navigationItem.leftBarButtonItem = button
     }
-    
-    private func showAlert(withTitle title: String, message: String, okAction: ((UIAlertAction) -> Void)?) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("alert_ok", comment: ""), style: .default, handler: okAction))
-        navigationController?.present(alertController, animated: true, completion: nil)
-    }
-    
     
     private func refreshAuthenticatorsTable() {
         authenticators = activatedAuthenticatorsObj.execute()

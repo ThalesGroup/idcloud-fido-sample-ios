@@ -13,7 +13,6 @@ class MainViewController: UIViewController {
     private let descriptionLabel: UILabel = UILabel()
     private var authenticateObj: Authenticate!
     private var unenrollObj: Unenroll!
-    private var processNotificationObj: ProcessNotification!
     private var secureLogObj : SecureLogArchive!
     
     // IdCloud FIDO UI SDK provides a conformer to the necessary delegates of IdCloud FIDO SDK
@@ -30,13 +29,13 @@ class MainViewController: UIViewController {
 
         view.backgroundColor = UIColor.extBackground
         
-        authenticateButton.setTitle(NSLocalizedString("authenticate_button_title", comment: ""), for: .normal)
+        authenticateButton.setTitle(NSLocalizedString("fetch_button_title", comment: ""), for: .normal)
         authenticateButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         authenticateButton.addTarget(self, action: #selector(authenticate(_:)), for: .touchUpInside)
         
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
-        descriptionLabel.text = NSLocalizedString("authenticate_instruction", comment: "")
+        descriptionLabel.text = NSLocalizedString("fetch_instruction", comment: "")
         
         let unenrollButton = UIBarButtonItem(title: NSLocalizedString("unenroll_button_title", comment: ""),
                                              style: .plain,
@@ -56,19 +55,7 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.processNotification(_:)), name: PushNotificationConstants.didReceiveUserNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.processNotification(_:)), name: PushNotificationConstants.willPresentUserNotification, object: nil)
-    }
-    
-    public override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: PushNotificationConstants.didReceiveUserNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: PushNotificationConstants.willPresentUserNotification, object: nil)
-        super.viewWillDisappear(animated)
-    }
- 
+
     // MARK: IBActions
     
     @objc internal func shareLogFiles(sender: AnyObject) {
@@ -117,9 +104,19 @@ class MainViewController: UIViewController {
             
             if error == nil {
                 // Display the result of the use-case and proceed accoridngly.
-                self?.showAlert(withTitle: NSLocalizedString("authenticate_alert_title", comment: ""), message: NSLocalizedString("authenticate_alert_message", comment: ""), okAction: nil)
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("fetch_alert_title", comment: ""),
+                                            message: NSLocalizedString("fetch_alert_message", comment: ""))
             } else {
-                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
+                let idcError = IDCError(_nsError: error!)
+                if idcError.code == .noPendingEvents {
+                    UIAlertController.showToast(viewController: self?.navigationController,
+                                                title: NSLocalizedString("fetch_alert_title", comment: ""),
+                                                message: idcError.localizedDescription)
+                } else {
+                    UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                     error: error!)
+                }
             }
         })
     }
@@ -137,58 +134,22 @@ class MainViewController: UIViewController {
         }, completion: { [weak self] (error) in
             if error == nil {
                 SamplePersistence.setEnrolled(false)
-                self?.showAlert(withTitle: NSLocalizedString("unenroll_alert_title", comment: ""), message: NSLocalizedString("unenroll_alert_message", comment: "")) { (okAction) in
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("unenroll_alert_title", comment: ""),
+                                            message: NSLocalizedString("unenroll_alert_message", comment: "")) {
                     let vc = AppDelegate.enrollViewHierarchy()
                     AppDelegate.switchWindowRootViewController(vc)
                 }
             } else {
-                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: { (okAction) in
+                UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: error!) { (okAction) in
                     if error?.code == IDCError.userNotEnrolled.rawValue {
                         let vc = AppDelegate.enrollViewHierarchy()
                         AppDelegate.switchWindowRootViewController(vc)
                     }
-                })
+                }
             }
         })
-    }
-    
-    @objc func processNotification(_ notification: Notification) {
-        // Execute the process notification use-case.
-        
-        // Retrieve the notification object from Notification
-        // This object is then passed to the IdCloud FIDO SDK for further processing.
-        // The SDK will then proceed to complete any pending scenarios.
-        let notificationObject = notification.object as! [AnyHashable : Any]
-        
-        // Initialize an instance of the ProcessNotification use-case, providing
-        // (1) the pre-configured URL
-        // (2) the uiDelegates
-        processNotificationObj = ProcessNotification(url: URL, uiDelegates: clientConformer)
-        processNotificationObj.execute(notification: notificationObject, progress: { [weak self] (progress) in
-            if let aView = self?.view {
-                ProgressHud.showProgress(forView: aView, progress: progress)
-            }
-        }, completion: { [weak self] (error) in
-            // Remove all views displayed by the IdCloud FIDO UI SDK.
-            self?.navigationController?.popToRootViewController(animated: true)
-            
-            if error == nil {
-                // Display the result of the use-case and proceed accordingly.
-                self?.showAlert(withTitle: NSLocalizedString("authenticate_alert_title", comment: ""), message: NSLocalizedString("authenticate_alert_message", comment: ""), okAction: nil)
-            } else {
-                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
-            }
-        })
-    }
-    
-    // MARK: Convenience Methods
-    
-    private func showAlert(withTitle title: String, message: String, okAction: ((UIAlertAction) -> Void)?) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("alert_ok", comment: ""), style: .default, handler: okAction))
-        navigationController?.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: Layout

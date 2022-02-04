@@ -36,11 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 #if ADVANCED
         UNUserNotificationCenter.current().delegate = self
-        if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable : Any] {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                NotificationCenter.default.post(name: PushNotificationConstants.didReceiveUserNotification, object: userInfo)
-            }
-        }
 #endif
         
         return true
@@ -81,6 +76,22 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 #endif
 
+// MARK: App-links
+extension AppDelegate {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let incomingURL = userActivity.webpageURL,
+              let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
+              let code = components.queryItems?.first?.value else {
+                  return false
+              }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            NotificationCenter.default.post(name: AppLinksConstants.didContinueUserActivity, object: code)
+        }
+        return true
+    }
+}
+
 // MARK: Helper Methods
 extension AppDelegate {
     static func enrollViewHierarchy() -> UIViewController {
@@ -102,9 +113,17 @@ extension AppDelegate {
 #if GETTING_STARTED
         let authenticateNVC = UINavigationController(rootViewController: AuthenticateViewController())
         authenticateNVC.navigationBar.isTranslucent = false
+
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .extBackground
+            authenticateNVC.navigationBar.standardAppearance = appearance
+            authenticateNVC.navigationBar.scrollEdgeAppearance = authenticateNVC.navigationBar.standardAppearance
+        }
         vc = authenticateNVC
 #elseif ADVANCED
-        vc = UITabBarController()
+        vc = MainTabBarController()
         if let vc = vc as? UITabBarController {
             vc.tabBar.isTranslucent = false
             let mainNVC = UINavigationController(rootViewController: MainViewController())

@@ -130,9 +130,9 @@ extension SettingsViewController {
             } else {
                 // Show error alert
                 DispatchQueue.main.async { [weak self] in
-                    self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""),
-                                    message: NSLocalizedString("enable_push_notification_from_settings_error", comment: ""),
-                                    okAction: nil)
+                    UIAlertController.showAlert(viewController: self?.navigationController,
+                                                title: NSLocalizedString("alert_error_title", comment: ""),
+                                                message: NSLocalizedString("enable_push_notification_from_settings_error", comment: ""))
                 }
             }
         }
@@ -145,9 +145,9 @@ extension SettingsViewController {
         NotificationCenter.default.removeObserver(self, name: PushNotificationConstants.didFailToRegisterForRemoteNotificationsWithError, object: nil)
         
         guard let devicePushToken = notification.object as? String else {
-            showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""),
-                      message: NSLocalizedString("enable_push_notification_from_settings_error", comment: ""),
-                      okAction: nil)
+            UIAlertController.showAlert(viewController: navigationController,
+                                        title: NSLocalizedString("alert_error_title", comment: ""),
+                                        message: NSLocalizedString("enable_push_notification_from_settings_error", comment: ""))
             return
         }
         
@@ -164,25 +164,15 @@ extension SettingsViewController {
             }, completion: { [weak self] error in
                 if error == nil {
                     // Display the result of the use-case and proceed accordingly.
-                    self?.showAlert(withTitle: NSLocalizedString("refresh_push_title", comment: ""),
-                              message: NSLocalizedString("refresh_push_success", comment: ""),
-                              okAction: nil)
+                    UIAlertController.showToast(viewController: self?.navigationController,
+                                                title: NSLocalizedString("refresh_push_title", comment: ""),
+                                                message: NSLocalizedString("refresh_push_success", comment: ""))
                 } else {
-                    self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""),
-                              message: NSLocalizedString("refresh_push_fail", comment: ""),
-                              okAction: nil)
+                    UIAlertController.showToast(viewController: self?.navigationController,
+                                                title: NSLocalizedString("alert_error_title", comment: ""),
+                                                message: NSLocalizedString("refresh_push_fail", comment: ""))
                 }
             })
         }
-    }
-    
-    // MARK: Convenience Methods
-    
-    private func showAlert(withTitle title: String, message: String, okAction: ((UIAlertAction) -> Void)?) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("alert_ok", comment: ""), style: .default, handler: okAction))
-        navigationController?.present(alertController, animated: true, completion: nil)
     }
 }

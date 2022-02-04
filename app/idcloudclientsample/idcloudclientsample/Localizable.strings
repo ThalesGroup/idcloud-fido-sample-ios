@@ -11,20 +11,29 @@
 "alert_proceed" = "Proceed";
 "alert_cancel" = "Cancel";
 
+// MARK: TabBar
+
+"home_tabbar_title" = "Home";
+"authenticators_tabbar_title" = "Authenticators";
+"settings_tabbar_title" = "Settings";
+
+// MARK: App Link
+
+"app_link_error_alert_message" = "You are already enrolled. Please unenroll your application before clicking the new enrollment link.";
+
 // MARK: Enroll
 
 "enroll_button_title" = "Enroll";
-"enroll_instruction" = "Please generate a QR code on Postman prior to enrollment.";
+"enroll_instruction" = "Trigger mobile enrollment and scan your QR code.";
 "enroll_alert_title" = "Enrollment";
 "enroll_alert_message" = "You have been successfully enrolled.";
 
+// MARK: Fetch
 
-// MARK: Authenticate/Sign
-
-"authenticate_button_title" = "Authenticate";
-"authenticate_instruction" = "Please generate an Authentication/Sign event on Postman prior to authentication.";
-"authenticate_alert_title" = "Authentication";
-"authenticate_alert_message" = "You have been successfully authenticated.";
+"fetch_button_title" = "Fetch";
+"fetch_instruction" = "Check pending request.";
+"fetch_alert_title" = "Fetch";
+"fetch_alert_message" = "You have been successfully authenticated.";
 
 "sign_alert_title" = "Transaction Details";
 "sign_alert_message_default" = "Failed to parse transaction details.";
@@ -34,12 +43,6 @@ Please confirm the following operation:
 %@
 Transfer %@ from %@ to %@.
 ";
-
-// MARK: TabBar
-
-"home_tabbar_title" = "Home";
-"authenticators_tabbar_title" = "Authenticators";
-"settings_tabbar_title" = "Settings";
 
 // MARK: Unenroll
 

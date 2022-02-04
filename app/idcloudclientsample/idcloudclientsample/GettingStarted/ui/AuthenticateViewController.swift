@@ -5,6 +5,7 @@
 
 import UIKit
 import IdCloudClientUi
+import IdCloudClient
 
 class AuthenticateViewController: UIViewController {
     private let authenticateButton: UIButton = UIButton(type: .system)
@@ -24,13 +25,13 @@ class AuthenticateViewController: UIViewController {
         
         view.backgroundColor = UIColor.extBackground
         
-        authenticateButton.setTitle(NSLocalizedString("authenticate_button_title", comment: ""), for: .normal)
+        authenticateButton.setTitle(NSLocalizedString("fetch_button_title", comment: ""), for: .normal)
         authenticateButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         authenticateButton.addTarget(self, action: #selector(authenticate(_:)), for: .touchUpInside)
         
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
-        descriptionLabel.text = NSLocalizedString("authenticate_instruction", comment: "")
+        descriptionLabel.text = NSLocalizedString("fetch_instruction", comment: "")
         
         setupLayout()
         
@@ -43,6 +44,16 @@ class AuthenticateViewController: UIViewController {
                 self?.navigationController?.pushViewController(presentViewController, animated: true)
             }
         }
+    }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleUserActivityEnroll(_:)), name: AppLinksConstants.didContinueUserActivity, object: nil)
+    }
+
+    public override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: AppLinksConstants.didContinueUserActivity, object: nil)
+        super.viewWillDisappear(animated)
     }
     
     private func initNavBar() {
@@ -101,22 +112,31 @@ class AuthenticateViewController: UIViewController {
             
             if error == nil {
                 // Display the result of the use-case and proceed accoridngly.
-                self?.showAlert(withTitle: NSLocalizedString("authenticate_alert_title", comment: ""), message: NSLocalizedString("authenticate_alert_message", comment: ""), okAction: nil)
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("fetch_alert_title", comment: ""),
+                                            message: NSLocalizedString("fetch_alert_message", comment: ""))
             } else {
-                self?.showAlert(withTitle: NSLocalizedString("alert_error_title", comment: ""), message: error!.localizedDescription, okAction: nil)
+                let idcError = IDCError(_nsError: error!)
+                if idcError.code == .noPendingEvents {
+                    UIAlertController.showToast(viewController: self?.navigationController,
+                                                title: NSLocalizedString("fetch_alert_title", comment: ""),
+                                                message: idcError.localizedDescription)
+                } else {
+                    UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: error!)
+                }
             }
         })
     }
-    
-    
-    // MARK: Convenience Methods
-    
-    private func showAlert(withTitle title: String, message: String, okAction: ((UIAlertAction) -> Void)?) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("alert_ok", comment: ""), style: .default, handler: okAction))
-        navigationController?.present(alertController, animated: true, completion: nil)
+
+    @objc internal func handleUserActivityEnroll(_ notification: Notification) {
+        guard SamplePersistence.isEnrolled else {
+            return
+        }
+
+        UIAlertController.showAlert(viewController: navigationController,
+                                    title: NSLocalizedString("alert_error_title", comment: ""),
+                                    message: NSLocalizedString("app_link_error_alert_message", comment: ""))
     }
     
     // MARK: Layout
