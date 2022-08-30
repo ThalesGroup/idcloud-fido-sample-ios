@@ -12,14 +12,14 @@ class RemoveAuthenticator : NSObject {
     private var authenticator : IDCAuthenticator
     
     // Set up an instance variable of IDCIdCloudClient
-    private let idcloudclient: IDCIdCloudClient
+    private let idcloudclient: IDCIdCloudClient!
     private var request: IDCRemoveAuthenticatorRequest!
     
-    init(url: String, authenticator: IDCAuthenticator) {
+    init(authenticator: IDCAuthenticator) {
         self.authenticator = authenticator
         
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = IDCIdCloudClient(url: url)
+        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {

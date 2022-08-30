@@ -35,8 +35,8 @@ class EnrollWithPush: Enroll {
         guard let devicePushToken = notification.object as? String else {
             fatalError("Notification should contain a devicePushToken")
         }
-        
-        enrollmentToken = IDCEnrollmentTokenFactory.createEnrollmentToken(code.data(using: .utf8)!)
+
+        enrollmentToken = try? IDCEnrollmentTokenFactory.createEnrollmentToken(code.data(using: .utf8)!)
         
         // Set the devicePushToken to be used for subsequent remote notifications.
         enrollmentToken.setDevicePushToken(devicePushToken)

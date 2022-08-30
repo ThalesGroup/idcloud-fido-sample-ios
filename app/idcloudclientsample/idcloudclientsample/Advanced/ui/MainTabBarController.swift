@@ -56,9 +56,8 @@ class MainTabBarController: UITabBarController {
         let notificationObject = notification.object as! [AnyHashable : Any]
 
         // Initialize an instance of the ProcessNotification use-case, providing
-        // (1) the pre-configured URL
-        // (2) the uiDelegates
-        processNotificationObj = ProcessNotification(url: URL, uiDelegates: clientConformer)
+        // (1) the uiDelegates
+        processNotificationObj = ProcessNotification(uiDelegates: clientConformer)
         processNotificationObj.execute(notification: notificationObject, progress: { [weak self] (progress) in
             if let navigationController = self?.selectedViewController as? UINavigationController,
                let aView = navigationController.topViewController?.view {

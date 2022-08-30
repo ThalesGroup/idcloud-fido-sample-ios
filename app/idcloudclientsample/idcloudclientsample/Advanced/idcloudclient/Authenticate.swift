@@ -13,17 +13,17 @@ class Authenticate : NSObject {
     private let uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate
     
     // Set up an instance variable of IDCIdCloudClient
-    private let idcloudclient: IDCIdCloudClient
+    private var idcloudclient: IDCIdCloudClient!
     private var request: IDCFetchRequest!
 
-    init(url: String, uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate) {
+    init(uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate) {
         self.uiDelegates = uiDelegates
-        
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = IDCIdCloudClient(url: url)
+        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
+        
         // Set up an instance of IDCUiDelegates, an encapsulated class containing all necessary UI delegates required by IdCloud FIDO SDK.
         // Ensure that you conform to these corresponding delegates.
         // Required callbacks are essential to ensure a proper UX behaviour.

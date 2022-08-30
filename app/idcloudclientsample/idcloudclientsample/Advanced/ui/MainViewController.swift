@@ -91,9 +91,8 @@ class MainViewController: UIViewController {
 
         
         // Initialize an instance of the Authenticate use-case, providing
-        // (1) the pre-configured URL
-        // (2) the uiDelegates
-        authenticateObj = Authenticate(url: URL, uiDelegates: clientConformer)
+        // (1) the uiDelegates
+        authenticateObj = Authenticate(uiDelegates: clientConformer)
         authenticateObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
@@ -124,9 +123,8 @@ class MainViewController: UIViewController {
     @objc internal func unenroll(_ button: UIBarButtonItem) {
         // Execute the unenroll use-case.
         
-        // Initialize an instance of the Unenroll use-case, providing
-        // (1) the pre-configured URL
-        unenrollObj = Unenroll(url: URL)
+        // Initialize an instance of the Unenroll use-case.
+        unenrollObj = Unenroll()
         unenrollObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)

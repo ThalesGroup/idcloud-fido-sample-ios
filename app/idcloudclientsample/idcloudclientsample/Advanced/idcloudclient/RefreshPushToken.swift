@@ -12,12 +12,12 @@ class RefreshPushToken: NSObject {
     typealias CompletionClosure = (NSError?) -> ()
 
     // Set up an instance variable of IDCIdCloudClient
-    private let idcloudclient: IDCIdCloudClient
+    private let idcloudclient: IDCIdCloudClient!
     private var request: IDCRefreshPushTokenRequest!
 
-    init(url: String) {
+    override init() {
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = IDCIdCloudClient(url: url)
+        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
     }
 
     func execute(devicePushToken: String, progress progressClosure: @escaping ProgressClosure, completion: @escaping (NSError?) -> ()) {
