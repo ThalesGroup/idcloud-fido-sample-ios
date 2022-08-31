@@ -96,3 +96,6 @@ Transfer %@ from %@ to %@.
 "version_title" = "Version";
 "push_notifications_title" = "Push Notifications";
 "enable_push_notification_from_settings_error" = "Ensure that Push Notifications are enabled via the System Settings";
+"others_title" = "Others";
+"get_client_id_title" = "Get Client ID";
+"client_id_title" = "Client ID";

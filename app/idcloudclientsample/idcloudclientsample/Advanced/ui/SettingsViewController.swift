@@ -75,6 +75,13 @@ class SettingsViewController: UIViewController {
                                 self?.registerPushNotifications()
                             })
                     ]),
+            Section(name: NSLocalizedString("others_title", comment: ""),
+                    rows: [
+                        Row(name: NSLocalizedString("get_client_id_title", comment: ""),
+                            tapClosure: { [weak self] in
+                                self?.getClientID()
+                            })
+                    ]),
         ]
     }
 }
@@ -87,6 +94,8 @@ extension SettingsViewController: UITableViewDelegate {
         switch row.name {
         case NSLocalizedString("refresh_push_title", comment: ""):
             registerPushNotifications()
+        case NSLocalizedString("get_client_id_title", comment: ""):
+            getClientID()
         default:
             break
         }
@@ -137,6 +146,19 @@ extension SettingsViewController {
             }
         }
     }
+
+    private func getClientID() {
+        // Fetches the client ID of the enrolled credential.
+        let idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        
+        guard let clientID = idcloudclient?.clientID() else {
+            return
+        }
+
+        UIAlertController.showToast(viewController: navigationController,
+                                    title: NSLocalizedString("client_id_title", comment: ""),
+                                    message: clientID)
+    }
     
     // MARK: Notification Observers
     
@@ -153,9 +175,8 @@ extension SettingsViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             // Initialize an instance of the Refresh Push Token use-case, providing
-            // (1) the pre-configured URL
-            // (2) the device push token
-            self?.refreshPushTokenObj = RefreshPushToken(url: URL)
+            // (1) the device push token
+            self?.refreshPushTokenObj = RefreshPushToken()
             self?.refreshPushTokenObj.execute(devicePushToken: devicePushToken,
                                               progress: { [weak self] (progress) in
                 if let aView = self?.view {

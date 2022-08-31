@@ -20,9 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Initialise SecureLog, to log necessary retrievable information.
+        // Initialise SecureLog, to log necessary retrievable information.
         initializeSecureLog()
-        
+
+        // Configure the PIN policy ruloes
+        configurePinRules()
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         var vc: UIViewController
@@ -195,6 +198,19 @@ extension AppDelegate {
         }
         //create instance of secure logger with configuration, only 1 instance is allowed to be created.
         secureLog = IDCIdCloudClient.configureSecureLog(config)
+    }
+
+    private func configurePinRules() {
+        // Configure the PIN minimum and maximum accepted lengths.
+        IDCPinConfig.setMinimumLength(PIN_LENGTH.min)
+        IDCPinConfig.setMaximumLength(PIN_LENGTH.max)
+
+        // Set the PIN rule policy.
+        do {
+            try IDCPinConfig.setPinRules(PIN_RULES)
+        } catch let error {
+            fatalError("Failed to set pin rules! error:\(error.localizedDescription)")
+        }
     }
 }
 

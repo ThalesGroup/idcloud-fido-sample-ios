@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,12 @@
 		11537585251AEEAD007BBA01 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537584251AEEAD007BBA01 /* MainViewController.swift */; };
 		11537589251AEEF9007BBA01 /* AuthenticatorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537588251AEEF9007BBA01 /* AuthenticatorsViewController.swift */; };
 		1153758D251AF399007BBA01 /* ActivatedAuthenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153758C251AF399007BBA01 /* ActivatedAuthenticators.swift */; };
+		3113CA96286E97670039538D /* SecureLogAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3113CA95286E97670039538D /* SecureLogAPI.framework */; };
+		31471B79286E94BA00F624A2 /* SecureLogAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31471B78286E94BA00F624A2 /* SecureLogAPI.framework */; };
+		318BEDF4286AA36400EC9547 /* IdCloudClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */; };
+		318BEDF5286AA36400EC9547 /* IdCloudClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		318BEDF7286AA3CC00EC9547 /* IdCloudClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */; };
+		318BEDF8286AA3CC00EC9547 /* IdCloudClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42C7EAC539ECCD9F3F028434 /* Pods_GettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */; };
 		90C4E4AD0D48C2AD4794A89D /* Pods_Advanced.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */; };
 		A1277600252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
@@ -55,6 +61,31 @@
 		D9F4773E25218A9F00A6D071 /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4773C25218A9F00A6D071 /* ProgressHud.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		318BEDF6286AA36400EC9547 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				318BEDF5286AA36400EC9547 /* IdCloudClient.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		318BEDF9286AA3CC00EC9547 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				318BEDF8286AA3CC00EC9547 /* IdCloudClient.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0720F259E3A0A56D4F0DA0AE /* Pods-GettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.release.xcconfig"; path = "Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 		115374C7251887FE007BBA01 /* GettingStarted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GettingStarted.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +108,10 @@
 		11537588251AEEF9007BBA01 /* AuthenticatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorsViewController.swift; sourceTree = "<group>"; };
 		1153758C251AF399007BBA01 /* ActivatedAuthenticators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatedAuthenticators.swift; sourceTree = "<group>"; };
 		1C2B89FE41CB38921F239243 /* Pods-Advanced.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.debug.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.debug.xcconfig"; sourceTree = "<group>"; };
+		3113CA95286E97670039538D /* SecureLogAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecureLogAPI.framework; path = $LIB_PATH/SecureLogAPI/$CONFIGURATION/SecureLogAPI.framework; sourceTree = "<group>"; };
+		3113CA98286E991A0039538D /* idcloudclientsample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "idcloudclientsample-Bridging-Header.h"; sourceTree = "<group>"; };
+		31471B78286E94BA00F624A2 /* SecureLogAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecureLogAPI.framework; path = $LIB_PATH/SecureLogAPI/$CONFIGURATION/SecureLogAPI.framework; sourceTree = "<group>"; };
+		318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IdCloudClient.xcframework; path = $LIB_PATH/IdCloudClient/$CONFIGURATION/IdCloudClient.xcframework; sourceTree = "<group>"; };
 		6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
 		97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Advanced.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12775FF252C436900ACABE8 /* SecureLogArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureLogArchive.swift; sourceTree = "<group>"; };
@@ -110,6 +145,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				318BEDF4286AA36400EC9547 /* IdCloudClient.xcframework in Frameworks */,
+				31471B79286E94BA00F624A2 /* SecureLogAPI.framework in Frameworks */,
 				1153754025199620007BBA01 /* libidcloudclientui.a in Frameworks */,
 				42C7EAC539ECCD9F3F028434 /* Pods_GettingStarted.framework in Frameworks */,
 			);
@@ -119,6 +156,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				318BEDF7286AA3CC00EC9547 /* IdCloudClient.xcframework in Frameworks */,
+				3113CA96286E97670039538D /* SecureLogAPI.framework in Frameworks */,
 				115375422519962D007BBA01 /* libidcloudclientui.a in Frameworks */,
 				90C4E4AD0D48C2AD4794A89D /* Pods_Advanced.framework in Frameworks */,
 			);
@@ -137,6 +176,7 @@
 				115374A925185800007BBA01 /* Products */,
 				1153753E25199620007BBA01 /* Frameworks */,
 				3C4B5C5C2157077BD4E6FFD6 /* Pods */,
+				31471B77286E93F900F624A2 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,8 +215,9 @@
 		1153753E25199620007BBA01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				115375412519962D007BBA01 /* libidcloudclientui.a */,
-				1153753F25199620007BBA01 /* libidcloudclientui.a */,
+				31471B78286E94BA00F624A2 /* SecureLogAPI.framework */,
+				3113CA95286E97670039538D /* SecureLogAPI.framework */,
+				318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */,
 				97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */,
 				D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */,
 			);
@@ -239,6 +280,15 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
+		31471B77286E93F900F624A2 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				1153753F25199620007BBA01 /* libidcloudclientui.a */,
+				115375412519962D007BBA01 /* libidcloudclientui.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		3C4B5C5C2157077BD4E6FFD6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +311,7 @@
 		D968C6DC2524E49D008AEEE6 /* idcloudclientsample */ = {
 			isa = PBXGroup;
 			children = (
+				3113CA98286E991A0039538D /* idcloudclientsample-Bridging-Header.h */,
 				A12775FF252C436900ACABE8 /* SecureLogArchive.swift */,
 				115374C9251887FE007BBA01 /* AppDelegate.swift */,
 				D953E63B251F8B0C00A11D1B /* Configuration.swift */,
@@ -292,11 +343,11 @@
 			buildConfigurationList = 115374D825188801007BBA01 /* Build configuration list for PBXNativeTarget "GettingStarted" */;
 			buildPhases = (
 				9A0D1AFC17EE6AD28ACF6E3B /* [CP] Check Pods Manifest.lock */,
-				D9D6206F25B0A7F300B122C8 /* [IdCloudClient] Copy Artifacts */,
 				115374C3251887FE007BBA01 /* Sources */,
 				115374C4251887FE007BBA01 /* Frameworks */,
 				115374C5251887FE007BBA01 /* Resources */,
 				93543B0023F9EA75B1352BB0 /* [CP] Embed Pods Frameworks */,
+				318BEDF6286AA36400EC9547 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -312,11 +363,11 @@
 			buildConfigurationList = 115374F22518884D007BBA01 /* Build configuration list for PBXNativeTarget "Advanced" */;
 			buildPhases = (
 				E6E0D810F7538D30A6719CF0 /* [CP] Check Pods Manifest.lock */,
-				D9D6207625B0A84200B122C8 /* [IdCloudClient] Copy Artifacts */,
 				115374DD25188849007BBA01 /* Sources */,
 				115374DE25188849007BBA01 /* Frameworks */,
 				115374DF25188849007BBA01 /* Resources */,
 				FD3365818CB9A048811596AF /* [CP] Embed Pods Frameworks */,
+				318BEDF9286AA3CC00EC9547 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -423,42 +474,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D9D6206F25B0A7F300B122C8 /* [IdCloudClient] Copy Artifacts */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[IdCloudClient] Copy Artifacts";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./copy_artifacts.sh\n";
-		};
-		D9D6207625B0A84200B122C8 /* [IdCloudClient] Copy Artifacts */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[IdCloudClient] Copy Artifacts";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./copy_artifacts.sh\n";
 		};
 		E6E0D810F7538D30A6719CF0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -694,6 +709,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.gettingstarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "idcloudclientsample/idcloudclientsample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -720,6 +736,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.gettingstarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "idcloudclientsample/idcloudclientsample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -741,9 +758,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "idcloudclientsample/idcloudclientsample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -766,10 +784,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "idcloudclientsample/idcloudclientsample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

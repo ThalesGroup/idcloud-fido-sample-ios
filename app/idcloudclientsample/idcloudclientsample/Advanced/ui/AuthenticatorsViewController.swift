@@ -28,9 +28,14 @@ class AuthenticatorsViewController: UIViewController {
         title = NSLocalizedString("authenticators_title", comment: "")
         
         // Set up an instance of the ActivatedAuthenticators use-case to retreive a list of registered authenticators.
-        activatedAuthenticatorsObj = ActivatedAuthenticators(url: URL)
+        activatedAuthenticatorsObj = ActivatedAuthenticators()
         // Retreive a list of registered authenticators.
-        authenticators = activatedAuthenticatorsObj.execute()
+        authenticators = activatedAuthenticatorsObj.execute(completion: { [weak self] (error) in
+            if error != nil {
+                UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: error!)
+            }
+        })
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -60,9 +65,8 @@ class AuthenticatorsViewController: UIViewController {
         // Execute the add authenticator use-case.
         
         // Initialize an instance of the Add Authenticate use-case, providing
-        // (1) the pre-configured URL
-        // (2) the uiDelegates
-        addAuthenticatorObj = AddAuthenticator(url: URL, uiDelegates: clientConformer)
+        // (1) the uiDelegates
+        addAuthenticatorObj = AddAuthenticator(uiDelegates: clientConformer)
         addAuthenticatorObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
@@ -102,9 +106,8 @@ class AuthenticatorsViewController: UIViewController {
         // Execute the remove authenticator use-case.
         
         // Initialize an instance of the Remove Authenticate use-case, providing
-        // (1) the pre-configured URL
-        // (2) the authenticaor to be removed
-        removeAuthenticatorObj = RemoveAuthenticator(url: URL, authenticator: authenticator)
+        // (1) the authenticaor to be removed
+        removeAuthenticatorObj = RemoveAuthenticator(authenticator: authenticator)
         removeAuthenticatorObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
@@ -132,9 +135,8 @@ class AuthenticatorsViewController: UIViewController {
         // Execute the change PIN use-case.
         
         // Initialize an instance of the Add Authenticate use-case, providing
-        // (1) the pre-configured URL
-        // (2) the pinPadUiDelegate
-        changePinObj = ChangePin(url: URL, pinPadUiDelegate: clientConformer as IDCSecurePinPadUiDelegate)
+        // (1) the pinPadUiDelegate
+        changePinObj = ChangePin(pinPadUiDelegate: clientConformer as IDCSecurePinPadUiDelegate)
         changePinObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)
@@ -174,7 +176,12 @@ class AuthenticatorsViewController: UIViewController {
     }
     
     private func refreshAuthenticatorsTable() {
-        authenticators = activatedAuthenticatorsObj.execute()
+        authenticators = activatedAuthenticatorsObj.execute(completion: { [weak self] (error) in
+            if error != nil {
+                UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: error!)
+            }
+        })
         tableView.reloadData()
     }
     

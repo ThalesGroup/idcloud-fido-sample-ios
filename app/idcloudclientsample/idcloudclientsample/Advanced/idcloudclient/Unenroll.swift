@@ -10,17 +10,13 @@ class Unenroll : NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
     typealias CompletionClosure = (NSError?) -> ()
 
-    private let url: String
-    
     // Set up an instance variable of IDCIdCloudClient
-    private let idcloudclient: IDCIdCloudClient
+    private let idcloudclient: IDCIdCloudClient!
     private var request: IDCUnenrollRequest!
 
-    init(url: String) {
-        self.url = url
-        
+    override init() {
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = IDCIdCloudClient(url: url)
+        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {

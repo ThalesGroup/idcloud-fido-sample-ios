@@ -33,5 +33,6 @@ STRIP_INSTALLED_PRODUCT = YES
 STRIP_STYLE = all
 COPY_PHASE_STRIP = YES
 
-OTHER_LDFLAGS = $(inherited) -lidcloudclient
+OTHER_LDFLAGS = $(inherited)
 LIB_PATH = $(PROJECT_DIR)/../../lib
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(LIB_PATH)/SecureLogAPI/$(CONFIGURATION)

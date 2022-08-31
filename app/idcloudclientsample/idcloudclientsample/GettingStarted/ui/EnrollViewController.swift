@@ -124,12 +124,11 @@ class EnrollViewController: UIViewController {
             
             // Initialize an instance of the Enroll use-case, providing
             // (1) the retrieved code
-            // (2) the pre-configured URL
-            // (3) the uiDelegates
+            // (2) the uiDelegates
 #if GETTING_STARTED
-            self?.enrollObj = Enroll(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+            self?.enrollObj = Enroll(code: enrollmentToken, uiDelegates: clientConformer)
 #elseif ADVANCED
-            self?.enrollObj = EnrollWithPush(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+            self?.enrollObj = EnrollWithPush(code: enrollmentToken, uiDelegates: clientConformer)
 #endif
 
             self?.enrollObj.execute(progress: { (progress) in
@@ -155,12 +154,11 @@ class EnrollViewController: UIViewController {
         }
         // Initialize an instance of the Enroll use-case, providing
         // (1) the retrieved code
-        // (2) the pre-configured URL
-        // (3) the uiDelegates
+        // (2) the uiDelegates
 #if GETTING_STARTED
-        enrollObj = Enroll(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+        enrollObj = Enroll(code: enrollmentToken, uiDelegates: clientConformer)
 #elseif ADVANCED
-        enrollObj = EnrollWithPush(code: enrollmentToken, url: URL, uiDelegates: clientConformer)
+        enrollObj = EnrollWithPush(code: enrollmentToken, uiDelegates: clientConformer)
 #endif
 
         enrollObj.execute(progress: { [weak self] (progress) in

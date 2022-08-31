@@ -8,20 +8,25 @@ import IdCloudClient
 
 class ActivatedAuthenticators : NSObject {
     
-    private let url: String
-    
     // Set up an instance variable of IDCIdCloudClient
-    private let idcloudclient: IDCIdCloudClient
-
-    init(url: String) {
-        self.url = url
-        
-        // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = IDCIdCloudClient(url: url)
+    private var idcloudclient: IDCIdCloudClient!
+    typealias CompletionClosure = (NSError?) -> ()
+    
+    override init() {
+       
     }
     
-    func execute() -> [IDCAuthenticator] {
-        // Retrieve a list of previously registered authenticators. Use this list to properly manage your authenticators.
-        return idcloudclient.activatedAuthenticators()
+    func execute(completion: @escaping CompletionClosure) -> [IDCAuthenticator] {
+   
+        do {
+            // Initialize an instance of IDCIdCloudClient.
+            self.idcloudclient = try IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+            // Retrieve a list of previously registered authenticators. Use this list to properly manage your authenticators.
+            let authenticators = try idcloudclient.activatedAuthenticators()
+            return authenticators
+        } catch let error {
+            completion(error as NSError?)
+            return [];
+        }
     }
 }
