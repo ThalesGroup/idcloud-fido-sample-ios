@@ -1,4 +1,9 @@
 //
+//
+// Copyright © 2020-2022 THALES. All rights reserved.
+//
+
+//
 //  AuthenticatorsViewController.swift
 //  Advanced
 //
@@ -277,6 +282,10 @@ extension AuthenticatorsViewController: UITableViewDataSource {
         case .pin:
             title = NSLocalizedString("pin_authenticator_title", comment: "")
             image = #imageLiteral(resourceName: "authenticator_pin")
+        case .platform:
+            title = NSLocalizedString("platform_authenticator_title", comment: "")
+            image = #imageLiteral(resourceName: "authenticator_platform")
+            
         @unknown default:
             fatalError("Unsupported authenticator")
         }

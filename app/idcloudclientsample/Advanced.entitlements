@@ -8,6 +8,8 @@
 	<array>
 		<string>applinks:idcfido.glitch.me</string>
 		<string>applinks:genuflecto.github.io</string>
+		<string>webcredentials:genuflecto.github.io</string>
+		<string>webcredentials:idcfido.glitch.me</string>
 	</array>
 	<key>com.apple.developer.usernotifications.time-sensitive</key>
 	<true/>

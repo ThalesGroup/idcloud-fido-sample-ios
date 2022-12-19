@@ -57,6 +57,7 @@ Transfer %@ from %@ to %@.
 "cancel_button_title" = "Cancel";
 "biometric_authenticator_title" = "Biometric Authenticator";
 "pin_authenticator_title" = "PIN Authenticator";
+"platform_authenticator_title" = "Platform Authenticator";
 "actionsheet_cancel" = "Cancel";
 "actionsheet_change_pin" = "Change PIN";
 
