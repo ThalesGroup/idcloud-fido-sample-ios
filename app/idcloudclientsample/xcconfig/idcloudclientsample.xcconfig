@@ -9,8 +9,8 @@
 // IdCloud FIDO SDK does not support bitcode
 ENABLE_BITCODE = NO
 
-// IdCloud FIDO SDK minimum iOS is 12.0
-IPHONEOS_DEPLOYMENT_TARGET = 12.0
+// IdCloud FIDO SDK minimum iOS is 13.0
+IPHONEOS_DEPLOYMENT_TARGET = 13.0
 
 // The following search paths is based on this folder structure.
 // Please modify accordingly if the structure is different.
@@ -26,13 +26,20 @@ IPHONEOS_DEPLOYMENT_TARGET = 12.0
 //            ├── idcloudclientui
 //            └── idcloudclientui.xcodeproj
 
-DEAD_CODE_STRIPPING = YES
-DEPLOYMENT_POSTPROCESSING = YES
-GCC_GENERATE_DEBUGGING_SYMBOLS = NO
-STRIP_INSTALLED_PRODUCT = YES
-STRIP_STYLE = all
-COPY_PHASE_STRIP = YES
+DEAD_CODE_STRIPPING[config=Release][sdk=*] = YES
+DEPLOYMENT_POSTPROCESSING[config=Release][sdk=*] = YES
+GCC_GENERATE_DEBUGGING_SYMBOLS[config=Release][sdk=*] = NO
+STRIP_INSTALLED_PRODUCT[config=Release][sdk=*] = YES
+STRIP_STYLE[config=Release][sdk=*] = all
+COPY_PHASE_STRIP[config=Release][sdk=*] = YES
 
 OTHER_LDFLAGS = $(inherited)
 LIB_PATH = $(PROJECT_DIR)/../../lib
-FRAMEWORK_SEARCH_PATHS = $(inherited) $(LIB_PATH)/SecureLogAPI/$(CONFIGURATION)
+SECURELOG_API_PATH[sdk=iphoneos*] = $(LIB_PATH)/SecureLogAPI/SecureLogAPI.xcframework/ios-arm64
+SECURELOG_API_PATH[sdk=iphonesimulator*] = $(LIB_PATH)/SecureLogAPI/SecureLogAPI.xcframework/ios-arm64_x86_64-simulator
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(SECURELOG_API_PATH)
+
+// copyright plist
+GENERATE_INFOPLIST_FILE = YES
+YEAR_VARIABLE = 2022
+INFOPLIST_KEY_NSHumanReadableCopyright = Copyright © $(YEAR_VARIABLE) THALES

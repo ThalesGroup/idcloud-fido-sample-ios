@@ -1,8 +1,6 @@
 //
-//  AppLinksConstants.swift
-//  Advanced
 //
-//  Copyright © 2021 Thales Group. All rights reserved.
+// Copyright © 2022 THALES. All rights reserved.
 //
 
 import Foundation

@@ -47,5 +47,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © $(YEAR_VARIABLE) THALES</string>
 </dict>
 </plist>

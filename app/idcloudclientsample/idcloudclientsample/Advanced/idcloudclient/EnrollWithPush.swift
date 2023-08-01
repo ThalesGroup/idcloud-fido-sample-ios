@@ -1,4 +1,9 @@
 //
+//
+// Copyright © 2021-2022 THALES. All rights reserved.
+//
+
+//
 //  EnrollWithPush.swift
 //  idcloudclientsample
 //
@@ -52,4 +57,3 @@ class EnrollWithPush: Enroll {
         enrollmentToken = nil
     }
 }
-

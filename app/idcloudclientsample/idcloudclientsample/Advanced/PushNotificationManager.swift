@@ -1,8 +1,6 @@
 //
-//  PushNotifications.swift
-//  idcloudclientsampleapp
 //
-//  Copyright © 2021 Thales Group. All rights reserved.
+// Copyright © 2021-2022 THALES. All rights reserved.
 //
 
 import Foundation
@@ -41,4 +39,3 @@ class PushNotificationManager {
         }
     }
 }
-

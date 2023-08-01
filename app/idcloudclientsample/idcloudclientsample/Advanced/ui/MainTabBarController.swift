@@ -1,4 +1,9 @@
 //
+//
+// Copyright © 2022 THALES. All rights reserved.
+//
+
+//
 //  MainTabBarController.swift
 //  Advanced
 //
