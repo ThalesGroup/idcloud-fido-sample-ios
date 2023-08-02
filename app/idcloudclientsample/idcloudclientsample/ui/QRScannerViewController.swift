@@ -1,4 +1,9 @@
 //
+//
+// Copyright © 2020-2021 THALES. All rights reserved.
+//
+
+//
 //  QRScannerViewController.swift
 //  idcloudclientsample
 //

@@ -1,4 +1,9 @@
 //
+//
+// Copyright © 2020-2022 THALES. All rights reserved.
+//
+
+//
 //  AuthenticateViewController.swift
 //  idcloudclientsample
 //

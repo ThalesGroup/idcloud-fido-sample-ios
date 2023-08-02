@@ -1,4 +1,9 @@
 //
+//
+// Copyright © 2020 THALES. All rights reserved.
+//
+
+//
 //  SamplePersistence.swift
 //  idcloudclientsample
 //
