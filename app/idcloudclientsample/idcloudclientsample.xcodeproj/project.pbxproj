@@ -700,7 +700,7 @@
 				CURRENT_PROJECT_VERSION = 202111090941;
 				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/GettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -727,7 +727,7 @@
 				CURRENT_PROJECT_VERSION = 202111090941;
 				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/GettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -753,7 +753,7 @@
 				CURRENT_PROJECT_VERSION = 202111090941;
 				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/Advanced/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -779,7 +779,7 @@
 				CURRENT_PROJECT_VERSION = 202111090941;
 				DEVELOPMENT_TEAM = LMY4YJ949Q;
 				INFOPLIST_FILE = idcloudclientsample/Advanced/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
