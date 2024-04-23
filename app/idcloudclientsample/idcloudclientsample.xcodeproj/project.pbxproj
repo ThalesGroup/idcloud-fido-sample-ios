@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,8 +25,6 @@
 		11537585251AEEAD007BBA01 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537584251AEEAD007BBA01 /* MainViewController.swift */; };
 		11537589251AEEF9007BBA01 /* AuthenticatorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11537588251AEEF9007BBA01 /* AuthenticatorsViewController.swift */; };
 		1153758D251AF399007BBA01 /* ActivatedAuthenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153758C251AF399007BBA01 /* ActivatedAuthenticators.swift */; };
-		3113CA96286E97670039538D /* SecureLogAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3113CA95286E97670039538D /* SecureLogAPI.framework */; };
-		31471B79286E94BA00F624A2 /* SecureLogAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31471B78286E94BA00F624A2 /* SecureLogAPI.framework */; };
 		318BEDF4286AA36400EC9547 /* IdCloudClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */; };
 		318BEDF5286AA36400EC9547 /* IdCloudClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		318BEDF7286AA3CC00EC9547 /* IdCloudClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */; };
@@ -35,6 +33,8 @@
 		90C4E4AD0D48C2AD4794A89D /* Pods_Advanced.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */; };
 		A1277600252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
 		A1277601252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
+		A172B6082BD78C6600BD03FF /* SecureLogAPI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A172B6072BD78C6600BD03FF /* SecureLogAPI.xcframework */; };
+		A172B60A2BD78CFA00BD03FF /* SecureLogAPI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A172B6072BD78C6600BD03FF /* SecureLogAPI.xcframework */; };
 		D9002770279FE1A40055E7B6 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D900276F279FE1A40055E7B6 /* UIAlertControllerExtension.swift */; };
 		D9002771279FE1A40055E7B6 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D900276F279FE1A40055E7B6 /* UIAlertControllerExtension.swift */; };
 		D9004BE327664CC000B071AD /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9004BE227664CC000B071AD /* PushNotificationManager.swift */; };
@@ -115,6 +115,7 @@
 		6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
 		97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Advanced.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12775FF252C436900ACABE8 /* SecureLogArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureLogArchive.swift; sourceTree = "<group>"; };
+		A172B6072BD78C6600BD03FF /* SecureLogAPI.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SecureLogAPI.xcframework; path = $LIB_PATH/SecureLogAPI/SecureLogAPI.xcframework; sourceTree = "<group>"; };
 		D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D900276F279FE1A40055E7B6 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		D9004BE227664CC000B071AD /* PushNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
@@ -146,9 +147,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				318BEDF4286AA36400EC9547 /* IdCloudClient.xcframework in Frameworks */,
-				31471B79286E94BA00F624A2 /* SecureLogAPI.framework in Frameworks */,
 				1153754025199620007BBA01 /* libidcloudclientui.a in Frameworks */,
 				42C7EAC539ECCD9F3F028434 /* Pods_GettingStarted.framework in Frameworks */,
+				A172B6082BD78C6600BD03FF /* SecureLogAPI.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,8 +157,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A172B60A2BD78CFA00BD03FF /* SecureLogAPI.xcframework in Frameworks */,
 				318BEDF7286AA3CC00EC9547 /* IdCloudClient.xcframework in Frameworks */,
-				3113CA96286E97670039538D /* SecureLogAPI.framework in Frameworks */,
 				115375422519962D007BBA01 /* libidcloudclientui.a in Frameworks */,
 				90C4E4AD0D48C2AD4794A89D /* Pods_Advanced.framework in Frameworks */,
 			);
@@ -215,6 +216,7 @@
 		1153753E25199620007BBA01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A172B6072BD78C6600BD03FF /* SecureLogAPI.xcframework */,
 				31471B78286E94BA00F624A2 /* SecureLogAPI.framework */,
 				3113CA95286E97670039538D /* SecureLogAPI.framework */,
 				318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */,
