@@ -17,11 +17,13 @@ IPHONEOS_DEPLOYMENT_TARGET = 14.0
 //    ├── app
 //    │   └── idcloudclientsample
 //    └── lib
-//        ├── idcloudclient
-//        │   ├── debug
-//        │   │   └── idcloudclient.xcframework
-//        │   └── release
-//        │   │   └── idcloudclient.xcframework
+//        ├── IdCloudClient
+//        │   ├── Debug
+//        │   │   └── IdCloudClient.xcframework
+//        │   └── Release
+//        │   │   └── IdCloudClient.xcframework
+//        ├── SecureLogAPI
+//        │   ├── SecureLogAPI.xcframework
 //        └── idcloudclientui
 //            ├── idcloudclientui
 //            └── idcloudclientui.xcodeproj
