@@ -1,8 +1,10 @@
 {
 	"info": {
-		"_postman_id": "0a39e761-7023-41fd-88c7-736f5d54895c",
+		"_postman_id": "0f87cf04-2f87-4a8c-9f0e-b9714058ed3d",
 		"name": "IdCloud FIDO Demo",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8910146",
+		"_collection_link": "https://gold-spaceship-8211.postman.co/workspace/Genuflecto-Workspace~45ab0b14-31bd-49e5-8864-2c7eb1e59652/collection/8910146-0f87cf04-2f87-4a8c-9f0e-b9714058ed3d?action=share&source=collection_link&creator=8910146"
 	},
 	"item": [
 		{
@@ -32,8 +34,17 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const randomName = pm.variables.replaceIn(\"{{$guid}}\");",
-									"pm.environment.set(\"randomName\", randomName);",
+									"function randomString(length=1) {",
+									"    let randomString = \"\";",
+									"    for (let i = 0; i < length; i++){",
+									"        randomString += pm.variables.replaceIn(\"{{$randomAlphaNumeric}}\");",
+									"    }",
+									"    return randomString;",
+									"}",
+									"",
+									"STRING_LEN = 16;",
+									"const randomName = \"\";",
+									"pm.environment.set(\"randomName\", randomString(STRING_LEN));",
 									"console.log(randomName);"
 								],
 								"type": "text/javascript"
@@ -57,7 +68,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\"\n    },\n    \"name\": \"Enroll_FIDO2\"\n}"
+							"raw": "{\n    \"input\": {\n        \"username\": \"{{randomName}}\"\n    },\n    \"name\": \"Enroll_FIDO2\"\n}"
 						},
 						"url": {
 							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
@@ -140,7 +151,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\",\n        \"pushNotificationMessage\": {\n            \"title\": \"Authentication Request\",\n            \"body\": \"An authentication request was made.\"\n        }\n    },\n    \"name\": \"Auth_FIDO2\"\n}"
+							"raw": "{\n    \"input\": {\n        \"username\": \"{{randomName}}\",\n        \"pushNotificationMessage\": {\n            \"title\": \"Authentication Request\",\n            \"body\": \"An authentication request was made.\"\n        }\n    },\n    \"name\": \"Auth_FIDO2\"\n}"
 						},
 						"url": {
 							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
@@ -191,7 +202,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"input\": {\n        \"userId\": \"{{randomName}}\",\n        \"transactionData\": [\n            {\n                \"name\": \"soybeans\"\n            },\n            {\n                \"px\": \"10.32\"\n            },\n            {\n                \"qty\": \"230\"\n            }\n        ]\n    },\n    \"name\": \"Sign_FIDO2\"\n}"
+							"raw": "{\n    \"input\": {\n        \"username\": \"{{randomName}}\",\n        \"transactionData\": [\n            {\n                \"name\": \"soybeans\"\n            },\n            {\n                \"px\": \"10.32\"\n            },\n            {\n                \"qty\": \"230\"\n            }\n        ]\n    },\n    \"name\": \"Sign_FIDO2\"\n}"
 						},
 						"url": {
 							"raw": "https://{{scsUrl}}/scs/v1/scenarios",
