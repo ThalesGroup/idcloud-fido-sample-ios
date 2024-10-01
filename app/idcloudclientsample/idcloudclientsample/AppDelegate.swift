@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var secureLog : SecureLog!
     
+    static var notificationID: String = ""
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -77,9 +79,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        NotificationCenter.default.post(name: PushNotificationConstants.willPresentUserNotification, object: userInfo)
-        
-        completionHandler(UNNotificationPresentationOptions(rawValue: 0))
+        if notification.request.identifier != AppDelegate.notificationID {
+            AppDelegate.notificationID = notification.request.identifier
+            NotificationCenter.default.post(name: PushNotificationConstants.willPresentUserNotification, object: userInfo)
+            
+            completionHandler(UNNotificationPresentationOptions(rawValue: 0))
+        }
     }
 }
 #endif
