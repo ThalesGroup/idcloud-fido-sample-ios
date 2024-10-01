@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -108,9 +108,7 @@
 		11537588251AEEF9007BBA01 /* AuthenticatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorsViewController.swift; sourceTree = "<group>"; };
 		1153758C251AF399007BBA01 /* ActivatedAuthenticators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatedAuthenticators.swift; sourceTree = "<group>"; };
 		1C2B89FE41CB38921F239243 /* Pods-Advanced.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.debug.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.debug.xcconfig"; sourceTree = "<group>"; };
-		3113CA95286E97670039538D /* SecureLogAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecureLogAPI.framework; path = $LIB_PATH/SecureLogAPI/$CONFIGURATION/SecureLogAPI.framework; sourceTree = "<group>"; };
 		3113CA98286E991A0039538D /* idcloudclientsample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "idcloudclientsample-Bridging-Header.h"; sourceTree = "<group>"; };
-		31471B78286E94BA00F624A2 /* SecureLogAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecureLogAPI.framework; path = $LIB_PATH/SecureLogAPI/$CONFIGURATION/SecureLogAPI.framework; sourceTree = "<group>"; };
 		318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IdCloudClient.xcframework; path = $LIB_PATH/IdCloudClient/$CONFIGURATION/IdCloudClient.xcframework; sourceTree = "<group>"; };
 		6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
 		97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Advanced.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,8 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				A172B6072BD78C6600BD03FF /* SecureLogAPI.xcframework */,
-				31471B78286E94BA00F624A2 /* SecureLogAPI.framework */,
-				3113CA95286E97670039538D /* SecureLogAPI.framework */,
 				318BEDF3286AA36400EC9547 /* IdCloudClient.xcframework */,
 				97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */,
 				D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */,
@@ -707,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.gettingstarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -734,7 +730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample.gettingstarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -760,7 +756,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "idcloudclientsample/idcloudclientsample-Bridging-Header.h";
@@ -786,7 +782,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thalesgroup.gemalto.idcloud.auth.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
