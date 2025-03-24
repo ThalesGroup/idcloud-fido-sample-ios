@@ -10,6 +10,7 @@
 
 import UIKit
 import IdCloudClientUi
+import IdCloudClient
 
 class EnrollViewController: UIViewController {
     private let enrollButton: UIButton = UIButton(type: .system)
@@ -56,6 +57,10 @@ class EnrollViewController: UIViewController {
         super.viewWillAppear(animated)
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleUserActivityEnroll(_:)), name: AppLinksConstants.didContinueUserActivity, object: nil)
+        
+        if !SamplePersistence.isEulaAccepted {
+            showEulaPrompt()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,7 +114,7 @@ class EnrollViewController: UIViewController {
         // asynchronous calls.
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             var qrCode: String?
-            var error: NSError?
+            var error: IDCError?
             var qrVC: QRScannerViewController!
             
             DispatchQueue.main.async {
@@ -182,10 +187,13 @@ class EnrollViewController: UIViewController {
         AppDelegate.switchWindowRootViewController(vc)
     }
 
-    private func completeEnrollment(error: NSError?) {
+    private func completeEnrollment(error: IDCError?) {
         // Remove all views displayed by the IdCloud FIDO UI SDK.
         navigationController?.popViewController(animated: true)
-        if error == nil {
+        if let error = error {
+            UIAlertController.showErrorAlert(viewController: navigationController,
+                                             error: error)
+        } else {
             // A simple caching mecahnism for future app cycles to determine if the user was
             // previously enrolled.
             // This should be properly managed and stored.
@@ -197,11 +205,25 @@ class EnrollViewController: UIViewController {
                                         message: NSLocalizedString("enroll_alert_message", comment: "")) { [weak self] in
                 self?.showSuccessFlow()
             }
-        } else {
-            UIAlertController.showErrorAlert(viewController: navigationController,
-                                             error: error!)
         }
     }
+    
+    private func showEulaPrompt() {
+        let alertController = UIAlertController(title: NSLocalizedString("eula_title", comment: ""),
+                                                message: NSLocalizedString("eula_message", comment: ""),
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("alert_cancel", comment: ""), style: .destructive) { _ in
+            fatalError()
+        })
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("eula_proceed", comment: ""), style: .default) { _ in
+            SamplePersistence.setEulaAccepted(true)
+            let url = URL(string: EULA_URL)!
+            UIApplication.shared.open(url)
+        })
+                                  
+        present(alertController, animated: true, completion: nil)
+    }
+
     
     // MARK: Layout
     

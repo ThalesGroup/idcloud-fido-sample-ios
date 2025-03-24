@@ -14,18 +14,18 @@ import IdCloudClient
 
 class RefreshPushToken: NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
+    typealias CompletionClosure = (IDCError?) -> ()
 
     // Set up an instance variable of IDCIdCloudClient
     private let idcloudclient: IDCIdCloudClient!
-    private var request: IDCRefreshPushTokenRequest!
+    private var request: RefreshPushTokenRequest!
 
     override init() {
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        self.idcloudclient = try? IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
     }
 
-    func execute(devicePushToken: String, progress progressClosure: @escaping ProgressClosure, completion: @escaping (NSError?) -> ()) {
+    func execute(devicePushToken: String, progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
         // Create an instance of the RefreshPushToken request.
         // Instances of requests should be held as an instance variable to ensure that completion callbacks will function as expected and to prevent unexpected behaviour.
         request = idcloudclient.createRefreshPushTokenRequest(withDeviceToken: devicePushToken, progress: { (progress) in
@@ -33,7 +33,7 @@ class RefreshPushToken: NSObject {
         }, completion: { (response, error) in
             // Callback to the UI.
             // These are executed on the Main thread.
-            completion(error as NSError?)
+            completion(error)
         })
         
         // Execute the request.

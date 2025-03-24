@@ -154,7 +154,7 @@ extension SettingsViewController {
 
     private func getClientID() {
         // Fetches the client ID of the enrolled credential.
-        let idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        let idcloudclient = try? IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
         
         guard let clientID = idcloudclient?.clientID() else {
             return

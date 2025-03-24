@@ -21,6 +21,12 @@
 
 "app_link_error_alert_message" = "You are already enrolled. Please unenroll your application before clicking the new enrollment link.";
 
+// MARK: EULA
+
+"eula_title" = "EULA";
+"eula_message" = "By continuing, you agree that you have read and accepted the EULA.";
+"eula_proceed" = "Take me there";
+
 // MARK: Enroll
 
 "enroll_button_title" = "Enroll";

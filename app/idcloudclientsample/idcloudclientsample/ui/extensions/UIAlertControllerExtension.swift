@@ -26,16 +26,15 @@ extension UIAlertController {
     }
 
     static func showErrorAlert(viewController: UIViewController?,
-                               error: NSError,
+                               error: IDCError,
                                okMessage: String = NSLocalizedString("alert_ok", comment: ""),
                                okAction: ((UIAlertAction) -> Void)? = nil) {
         // Do not show alert when error code is IDCErrorUserCancelled
-        let idcError = IDCError(_nsError: error)
-        if idcError.code == .userCancelled {
+        if error.code == .userCancelled {
             return
         }
         let alertController = UIAlertController(title: NSLocalizedString("alert_error_title", comment: ""),
-                                                message: idcError.localizedDescription,
+                                                message: error.localizedDescription,
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: okMessage, style: .default, handler: okAction))
         viewController?.present(alertController, animated: true, completion: nil)

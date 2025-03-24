@@ -13,10 +13,10 @@ import IdCloudClient
 
 class Enroll: NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
+    typealias CompletionClosure = (IDCError?) -> ()
     
-    private var _enrollmentToken: IDCEnrollmentToken?
-    var enrollmentToken: IDCEnrollmentToken! {
+    private var _enrollmentToken: EnrollmentToken?
+    var enrollmentToken: EnrollmentToken! {
         set {
             if _enrollmentToken == nil {
                 // Ignore incoming value
@@ -29,13 +29,13 @@ class Enroll: NSObject {
     }
 
     internal let code: String
-    private let uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate
+    private let uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate
     
     // Set up an instance variable of IDCIdCloudClient
     private var idcloudclient: IDCIdCloudClient!
-    private var request: IDCEnrollRequest!
+    private var request: EnrollRequest!
     
-    init(code: String, uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate) {
+    init(code: String, uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate) {
         self.code = code
         self.uiDelegates = uiDelegates
     }
@@ -43,17 +43,17 @@ class Enroll: NSObject {
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
         do {
             // Initialize an instance of IDCIdCloudClient.
-            self.idcloudclient = try IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+            self.idcloudclient = try IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
             
             // Initialize an instance of IDCEnrollmentToken from its corresponding Factory.
             // Instances of IDCEnrollmentToken are initialized with a code retrieved from the Bank via a QR code (i.e. or other means) and is simply encoded as a UTF8 data.
-            enrollmentToken = try IDCEnrollmentTokenFactory.createEnrollmentToken(code.data(using: .utf8)!)
+            enrollmentToken = try EnrollmentTokenFactory.createEnrollmentToken(code.data(using: .utf8)!)
             
             // Set up an instance of IDCUiDelegates, an encapsulated class containing all necessary UI delegates required by IdCloud FIDO SDK.
             // Ensure that you conform to these corresponding delegates.
-            // Required callbacks are essential to ensure a proper UX behaviour.
+            // Required callbacks are essential to ensure a proper UX behaviour
             // As a means of convenience, the IdCloud FIDO UI SDK provides a ClientConformer class which conforms to all necessary delegates of IdCloud FIDO SDK
-            let idcUiDelegates = IDCUiDelegates()
+            var idcUiDelegates = UiDelegates()
             idcUiDelegates.commonUiDelegate = uiDelegates
             idcUiDelegates.biometricUiDelegate = uiDelegates
             idcUiDelegates.securePinPadUiDelegate = uiDelegates
@@ -68,15 +68,16 @@ class Enroll: NSObject {
                 // Callback to the UI.
                 // These are executed on the Main thread.
                 self?.enrollmentToken.wipe()
-                completion(error as NSError?)
+                completion(error)
             })
             
             // Execute the request.
             // Requests on IdCloud FIDO SDK are executed on the own unique threads.
             request.execute()
-        } catch let error {
-            completion(error as NSError?)
+        } catch let error as IDCError {
+            completion(error)
+        } catch _ {
+            fatalError("Invalid unhandled error.")
         }
-        
     }
 }

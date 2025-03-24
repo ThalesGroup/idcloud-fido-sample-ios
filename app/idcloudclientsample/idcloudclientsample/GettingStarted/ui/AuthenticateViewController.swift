@@ -114,21 +114,20 @@ class AuthenticateViewController: UIViewController {
             // Remove all views displayed by the IdCloud FIDO UI SDK.
             self?.navigationController?.popToRootViewController(animated: true)
             
-            if error == nil {
-                // Display the result of the use-case and proceed accoridngly.
-                UIAlertController.showToast(viewController: self?.navigationController,
-                                            title: NSLocalizedString("fetch_alert_title", comment: ""),
-                                            message: NSLocalizedString("fetch_alert_message", comment: ""))
-            } else {
-                let idcError = IDCError(_nsError: error!)
+            if let idcError = error {
                 if idcError.code == .noPendingEvents {
                     UIAlertController.showToast(viewController: self?.navigationController,
                                                 title: NSLocalizedString("fetch_alert_title", comment: ""),
                                                 message: idcError.localizedDescription)
                 } else {
                     UIAlertController.showErrorAlert(viewController: self?.navigationController,
-                                                 error: error!)
+                                                 error: idcError)
                 }
+            } else {
+                // Display the result of the use-case and proceed accoridngly.
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("fetch_alert_title", comment: ""),
+                                            message: NSLocalizedString("fetch_alert_message", comment: ""))
             }
         })
     }

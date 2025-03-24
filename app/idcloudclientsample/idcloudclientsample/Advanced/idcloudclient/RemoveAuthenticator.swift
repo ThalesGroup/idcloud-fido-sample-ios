@@ -13,18 +13,18 @@ import IdCloudClient
 
 class RemoveAuthenticator : NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
-    private var authenticator : IDCAuthenticator
+    typealias CompletionClosure = (IDCError?) -> ()
+    private var authenticator : Authenticator
     
     // Set up an instance variable of IDCIdCloudClient
     private let idcloudclient: IDCIdCloudClient!
-    private var request: IDCRemoveAuthenticatorRequest!
+    private var request: RemoveAuthenticatorRequest!
     
-    init(authenticator: IDCAuthenticator) {
+    init(authenticator: Authenticator) {
         self.authenticator = authenticator
         
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        self.idcloudclient = try? IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
@@ -38,7 +38,7 @@ class RemoveAuthenticator : NSObject {
             self?.authenticator.wipe()
             // Callback to the UI.
             // These are executed on the Main thread.
-            completion(error as NSError?)
+            completion(error)
         })
 
         // Execute the request.
