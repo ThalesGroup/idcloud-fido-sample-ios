@@ -13,10 +13,10 @@ import IdCloudClient
 
 class Enroll: NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
+    typealias CompletionClosure = (IDCError?) -> ()
     
-    private var _enrollmentToken: IDCEnrollmentToken?
-    var enrollmentToken: IDCEnrollmentToken! {
+    private var _enrollmentToken: EnrollmentToken?
+    var enrollmentToken: EnrollmentToken! {
         set {
             if _enrollmentToken == nil {
                 // Ignore incoming value
@@ -29,21 +29,22 @@ class Enroll: NSObject {
     }
 
     internal let code: String
-    private let uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate
+    private let uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate
     
     // Set up an instance variable of IDCIdCloudClient
     private var idcloudclient: IDCIdCloudClient!
-    private var request: IDCEnrollRequest!
+    private var request: EnrollRequest!
     
-    init(code: String, uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate) {
+    init(code: String, uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate) {
         self.code = code
         self.uiDelegates = uiDelegates
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
+        
         do {
             // Initialize an instance of IDCIdCloudClient.
-            self.idcloudclient = try IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+            self.idcloudclient = try IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
             
             // Initialize an instance of IDCEnrollmentToken from its corresponding Factory.
             // Instances of IDCEnrollmentToken are initialized with a code retrieved from the Bank via a QR code (i.e. or other means) and is simply encoded as a UTF8 data.
@@ -67,8 +68,10 @@ class Enroll: NSObject {
             /* 4 */
             ## Execute request ##
             
-        } catch let error {
-            completion(error as NSError?)
+        } catch let error as IDCError {
+            completion(error)
+        } catch _ {
+            fatalError("Unhandle error type.")
         }
     }
 }
