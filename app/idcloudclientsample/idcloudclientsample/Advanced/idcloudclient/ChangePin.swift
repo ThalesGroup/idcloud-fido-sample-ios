@@ -14,19 +14,19 @@ import IdCloudClientUi
 
 class ChangePin : NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
-    weak var pinPadUiDelegate: IDCSecurePinPadUiDelegate?
+    typealias CompletionClosure = (IDCError?) -> ()
+    weak var pinPadUiDelegate: SecurePinPadUiDelegate?
     
     // Set up an instance variable of IDCIdCloudClient
     private let idcloudclient: IDCIdCloudClient!
-    private var request: IDCChangePinRequest!
+    private var request: ChangePinRequest!
     
-    init(pinPadUiDelegate: IDCSecurePinPadUiDelegate) {
+    init(pinPadUiDelegate: SecurePinPadUiDelegate) {
 
         self.pinPadUiDelegate = pinPadUiDelegate
         
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        self.idcloudclient = try? IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
@@ -39,7 +39,7 @@ class ChangePin : NSObject {
         }, completion: { (response, error) in
             // Callback to the UI.
             // These are executed on the Main thread.
-            completion(error as NSError?)
+            completion(error)
         })
         
         // Execute the request.

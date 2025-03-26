@@ -14,27 +14,27 @@ import IdCloudClient
 
 class ProcessNotification: NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
+    typealias CompletionClosure = (IDCError?) -> ()
 
-    private let uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate
+    private let uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate
 
     // Set up an instance variable of IDCIdCloudClient
     private let idcloudclient: IDCIdCloudClient!
-    private var request: IDCProcessNotificationRequest!
+    private var request: ProcessNotificationRequest!
 
-    init(uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate) {
+    init(uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate) {
         self.uiDelegates = uiDelegates
         
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        self.idcloudclient = try? IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
     }
 
-    func execute(notification: [AnyHashable : Any], progress progressClosure: @escaping ProgressClosure, completion: @escaping (NSError?) -> ()) {
+    func execute(notification: [AnyHashable : Any], progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
         // Set up an instance of IDCUiDelegates, an encapsulated class containing all necessary UI delegates required by IdCloud FIDO SDK.
         // Ensure that you conform to these corresponding delegates.
         // Required callbacks are essential to ensure a proper UX behaviour.
         // As a means of convenience, the IdCloud FIDO UI SDK provides a ClientConformer class which conforms to all necessary delegates of IdCloud FIDO SDK
-        let idcUiDelegates = IDCUiDelegates()
+        var idcUiDelegates = UiDelegates()
         idcUiDelegates.commonUiDelegate = uiDelegates
         idcUiDelegates.biometricUiDelegate = uiDelegates
         idcUiDelegates.securePinPadUiDelegate = uiDelegates
@@ -46,7 +46,7 @@ class ProcessNotification: NSObject {
         }, completion: { (response, error) in
             // Callback to the UI.
             // These are executed on the Main thread.
-            completion(error as NSError?)
+            completion(error)
         })
         
         // Execute the request.

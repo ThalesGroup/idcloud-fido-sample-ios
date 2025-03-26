@@ -15,23 +15,25 @@ class ActivatedAuthenticators : NSObject {
     
     // Set up an instance variable of IDCIdCloudClient
     private var idcloudclient: IDCIdCloudClient!
-    typealias CompletionClosure = (NSError?) -> ()
+    typealias CompletionClosure = (IDCError?) -> ()
     
     override init() {
        
     }
     
-    func execute(completion: @escaping CompletionClosure) -> [IDCAuthenticator] {
+    func execute(completion: @escaping CompletionClosure) -> [Authenticator] {
    
         do {
             // Initialize an instance of IDCIdCloudClient.
-            self.idcloudclient = try IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+            self.idcloudclient = try IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
             // Retrieve a list of previously registered authenticators. Use this list to properly manage your authenticators.
             let authenticators = try idcloudclient.activatedAuthenticators()
             return authenticators
-        } catch let error {
-            completion(error as NSError?)
-            return [];
+        } catch let error as IDCError {
+            completion(error)
+            return []
+        } catch _ {
+            fatalError("Unhandled error.")
         }
     }
 }

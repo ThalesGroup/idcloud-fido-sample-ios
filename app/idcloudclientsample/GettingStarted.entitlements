@@ -5,11 +5,11 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:idcfido.glitch.me</string>
-		<string>applinks:genuflecto.github.io</string>
 		<string>applinks:idcfido.demo.gemalto.com</string>
+		<string>applinks:genuflecto.github.io</string>
 		<string>webcredentials:genuflecto.github.io</string>
-		<string>webcredentials:idcfido.glitch.me</string>
 		<string>webcredentials:idcfido.demo.gemalto.com</string>
+		<string>webcredentials:idcfido.glitch.me</string>
 	</array>
 </dict>
 </plist>

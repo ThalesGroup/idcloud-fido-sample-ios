@@ -13,7 +13,10 @@ import Foundation
 import IdCloudClient
 
 // IdCloud Mobile Service Server URL
-let URL = ""
+let MS_URL = ""
+
+// IdCloud EULA URL
+let EULA_URL = "https://thales-cpl.stoplight.io/docs/idcloud-fido/dkfz5854w3rab-mobile-testing-application-end-user-license-agreement"
 
 // IdCloud Server Tenant ID
 #if DEBUG
@@ -22,9 +25,8 @@ let TENANT_ID = ""
 let TENANT_ID = ""
 #endif
 
-
 // IdCloud PIN Authenticator rules
-let PIN_RULES: IDCPinRule = [.length, .palindrome, .series, .uniform]
+let PIN_RULES: PinConfig.PinRule = [.length, .palindrome, .series, .uniform]
 
 // IdCloud PIN Authenticator minimum and maximum lengths
 let PIN_LENGTH: (min: UInt, max: UInt) = (6, 8)

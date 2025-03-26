@@ -106,21 +106,20 @@ class MainViewController: UIViewController {
             // Remove all views displayed by the IdCloud FIDO UI SDK.
             self?.navigationController?.popToRootViewController(animated: true)
             
-            if error == nil {
-                // Display the result of the use-case and proceed accoridngly.
-                UIAlertController.showToast(viewController: self?.navigationController,
-                                            title: NSLocalizedString("fetch_alert_title", comment: ""),
-                                            message: NSLocalizedString("fetch_alert_message", comment: ""))
-            } else {
-                let idcError = IDCError(_nsError: error!)
+            if let idcError = error {
                 if idcError.code == .noPendingEvents {
                     UIAlertController.showToast(viewController: self?.navigationController,
                                                 title: NSLocalizedString("fetch_alert_title", comment: ""),
                                                 message: idcError.localizedDescription)
                 } else {
                     UIAlertController.showErrorAlert(viewController: self?.navigationController,
-                                                     error: error!)
+                                                     error: idcError)
                 }
+            } else {
+                // Display the result of the use-case and proceed accoridngly.
+                UIAlertController.showToast(viewController: self?.navigationController,
+                                            title: NSLocalizedString("fetch_alert_title", comment: ""),
+                                            message: NSLocalizedString("fetch_alert_message", comment: ""))
             }
         })
     }
@@ -135,21 +134,21 @@ class MainViewController: UIViewController {
                 ProgressHud.showProgress(forView: aView, progress: progress)
             }
         }, completion: { [weak self] (error) in
-            if error == nil {
+            if let idcError = error {
+                UIAlertController.showErrorAlert(viewController: self?.navigationController,
+                                                 error: idcError) { (okAction) in
+                    if idcError.code == .userNotEnrolled {
+                        let vc = AppDelegate.enrollViewHierarchy()
+                        AppDelegate.switchWindowRootViewController(vc)
+                    }
+                }
+            } else {
                 SamplePersistence.setEnrolled(false)
                 UIAlertController.showToast(viewController: self?.navigationController,
                                             title: NSLocalizedString("unenroll_alert_title", comment: ""),
                                             message: NSLocalizedString("unenroll_alert_message", comment: "")) {
                     let vc = AppDelegate.enrollViewHierarchy()
                     AppDelegate.switchWindowRootViewController(vc)
-                }
-            } else {
-                UIAlertController.showErrorAlert(viewController: self?.navigationController,
-                                                 error: error!) { (okAction) in
-                    if error?.code == IDCError.userNotEnrolled.rawValue {
-                        let vc = AppDelegate.enrollViewHierarchy()
-                        AppDelegate.switchWindowRootViewController(vc)
-                    }
                 }
             }
         })

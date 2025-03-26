@@ -14,7 +14,7 @@ import IdCloudClientUi
 
 class AuthenticatorsViewController: UIViewController {
     private let tableView: UITableView = UITableView()
-    private var authenticators: [IDCAuthenticator] = []
+    private var authenticators: [Authenticator] = []
     private var activatedAuthenticatorsObj: ActivatedAuthenticators!
     
     private let reuseIdentifier = "UITableViewCell"
@@ -107,7 +107,7 @@ class AuthenticatorsViewController: UIViewController {
     
     // MARK: Private Methods
     
-    private func removeAuthenticator(authenticator: IDCAuthenticator) {
+    private func removeAuthenticator(authenticator: Authenticator) {
         // Execute the remove authenticator use-case.
         
         // Initialize an instance of the Remove Authenticate use-case, providing
@@ -141,7 +141,7 @@ class AuthenticatorsViewController: UIViewController {
         
         // Initialize an instance of the Add Authenticate use-case, providing
         // (1) the pinPadUiDelegate
-        changePinObj = ChangePin(pinPadUiDelegate: clientConformer as IDCSecurePinPadUiDelegate)
+        changePinObj = ChangePin(pinPadUiDelegate: clientConformer as SecurePinPadUiDelegate)
         changePinObj.execute(progress: { [weak self] (progress) in
             if let aView = self?.view {
                 ProgressHud.showProgress(forView: aView, progress: progress)

@@ -13,19 +13,19 @@ import IdCloudClient
 
 class Authenticate : NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
+    typealias CompletionClosure = (IDCError?) -> ()
 
-    private let uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate
+    private let uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate
     
     // Set up an instance variable of IDCIdCloudClient
     private let idcloudclient: IDCIdCloudClient!
-    private var request: IDCFetchRequest!
+    private var request: FetchRequest!
 
-    init(uiDelegates: IDCCommonUiDelegate & IDCBiometricUiDelegate & IDCSecurePinPadUiDelegate) {
+    init(uiDelegates: CommonUiDelegate & BiometricUiDelegate & SecurePinPadUiDelegate) {
         self.uiDelegates = uiDelegates
         
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        self.idcloudclient = try? IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {

@@ -13,15 +13,15 @@ import IdCloudClient
 
 class Unenroll : NSObject {
     typealias ProgressClosure = (IDCProgress) -> ()
-    typealias CompletionClosure = (NSError?) -> ()
+    typealias CompletionClosure = (IDCError?) -> ()
 
     // Set up an instance variable of IDCIdCloudClient
     private let idcloudclient: IDCIdCloudClient!
-    private var request: IDCUnenrollRequest!
+    private var request: UnenrollRequest!
 
     override init() {
         // Initialize an instance of IDCIdCloudClient.
-        self.idcloudclient = try? IDCIdCloudClient(url: URL, tenantId: TENANT_ID)
+        self.idcloudclient = try? IDCIdCloudClient(url: MS_URL, tenantId: TENANT_ID)
     }
     
     func execute(progress progressClosure: @escaping ProgressClosure, completion: @escaping CompletionClosure) {
@@ -35,7 +35,7 @@ class Unenroll : NSObject {
             // These are executed on the Main thread.
             // As a resutl of the unenroll request, the user is returned to an initial (default) state.
             // The user would that need to re-enroll in order to properly utilize the IdCloud FIDO SDK.
-            completion(error as NSError?)
+            completion(error)
         })
         
         // Execute the request.

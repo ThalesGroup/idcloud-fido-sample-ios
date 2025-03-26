@@ -16,10 +16,6 @@ import IdCloudClientUi
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    var idcloudclient: IDCIdCloudClient!
-    var request: IDCUnenrollRequest!
-    
     var secureLog : SecureLog!
     
     static var notificationID: String = ""
@@ -32,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Configure the PIN policy ruloes
         configurePinRules()
+        
+        // Configure cert pinning
+        configureCertPinning()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
@@ -207,19 +206,29 @@ extension AppDelegate {
             slComps.publicKeyExponent = NSData(bytes: SecureLogPublicKey.publicKeyExponent, length: SecureLogPublicKey.publicKeyExponent.count) as Data
         }
         //create instance of secure logger with configuration, only 1 instance is allowed to be created.
-        secureLog = IDCIdCloudClient.configureSecureLog(config)
+        secureLog = IDCSecureLogConfig.configureSecureLog(config)
     }
 
     private func configurePinRules() {
         // Configure the PIN minimum and maximum accepted lengths.
-        IDCPinConfig.setMinimumLength(PIN_LENGTH.min)
-        IDCPinConfig.setMaximumLength(PIN_LENGTH.max)
+        _ = PinConfig.setMinimumLength(PIN_LENGTH.min)
+        _ = PinConfig.setMaximumLength(PIN_LENGTH.max)
 
         // Set the PIN rule policy.
         do {
-            try IDCPinConfig.setPinRules(PIN_RULES)
+            try PinConfig.setPinRules(PIN_RULES)
         } catch let error {
             fatalError("Failed to set pin rules! error:\(error.localizedDescription)")
         }
+    }
+    
+    private func configureCertPinning() {
+        guard
+            let rootCertURL = Bundle.main.url(forResource: "root_cert", withExtension: "cer"),
+            let rootCertData = try? Data(contentsOf: rootCertURL)
+         else {
+            fatalError("Certificate file not found or Unable to load the certificate.")
+        }
+        IDCConfig.setTlsCertificates([rootCertData])
     }
 }
