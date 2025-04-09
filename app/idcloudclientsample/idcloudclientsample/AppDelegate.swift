@@ -224,11 +224,11 @@ extension AppDelegate {
     
     private func configureCertPinning() {
         guard
-            let rootCertURL = Bundle.main.url(forResource: "root_cert", withExtension: "cer"),
-            let rootCertData = try? Data(contentsOf: rootCertURL)
+            let certURL = Bundle.main.url(forResource: "intermediate_cert", withExtension: "cer"),
+            let certData = try? Data(contentsOf: certURL)
          else {
             fatalError("Certificate file not found or Unable to load the certificate.")
         }
-        IDCConfig.setTlsCertificates([rootCertData])
+        IDCConfig.setTlsCertificates([certData])
     }
 }

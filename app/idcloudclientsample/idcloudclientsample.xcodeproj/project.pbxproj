@@ -28,6 +28,8 @@
 		42C7EAC539ECCD9F3F028434 /* Pods_GettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05F0E24BAA570487D8B2F94 /* Pods_GettingStarted.framework */; };
 		4D3209D72D701AC700770B2C /* IdCloudClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A2BCDE2CC1F22E0076E7A5 /* IdCloudClient.xcframework */; };
 		4D3209D82D701AC700770B2C /* IdCloudClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1A2BCDE2CC1F22E0076E7A5 /* IdCloudClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4DB0769E2DA61E1D006A0C70 /* intermediate_cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4DB0769D2DA61E1D006A0C70 /* intermediate_cert.cer */; };
+		4DB076A02DA61E23006A0C70 /* intermediate_cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4DB0769F2DA61E22006A0C70 /* intermediate_cert.cer */; };
 		90C4E4AD0D48C2AD4794A89D /* Pods_Advanced.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */; };
 		A1277600252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
 		A1277601252C436900ACABE8 /* SecureLogArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12775FF252C436900ACABE8 /* SecureLogArchive.swift */; };
@@ -35,8 +37,6 @@
 		A1380B4D2BD7AF1500B2DA10 /* SecureLogAPI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1380B4A2BD7AEB700B2DA10 /* SecureLogAPI.xcframework */; };
 		A1A2BCE12CC1F2DA0076E7A5 /* IdCloudClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A2BCDE2CC1F22E0076E7A5 /* IdCloudClient.xcframework */; };
 		A1A2BCE22CC1F2DA0076E7A5 /* IdCloudClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1A2BCDE2CC1F22E0076E7A5 /* IdCloudClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BC8BFE1C2CCF5C5D007F77D0 /* root_cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = BC8BFE1B2CCF5C5D007F77D0 /* root_cert.cer */; };
-		BC8BFE1D2CCF5C5D007F77D0 /* root_cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = BC8BFE1B2CCF5C5D007F77D0 /* root_cert.cer */; };
 		D9002770279FE1A40055E7B6 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D900276F279FE1A40055E7B6 /* UIAlertControllerExtension.swift */; };
 		D9002771279FE1A40055E7B6 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D900276F279FE1A40055E7B6 /* UIAlertControllerExtension.swift */; };
 		D9004BE327664CC000B071AD /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9004BE227664CC000B071AD /* PushNotificationManager.swift */; };
@@ -113,6 +113,8 @@
 		3113CA95286E97670039538D /* SecureLogAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecureLogAPI.framework; path = $LIB_PATH/SecureLogAPI/$CONFIGURATION/SecureLogAPI.framework; sourceTree = "<group>"; };
 		3113CA98286E991A0039538D /* idcloudclientsample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "idcloudclientsample-Bridging-Header.h"; sourceTree = "<group>"; };
 		31471B78286E94BA00F624A2 /* SecureLogAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecureLogAPI.framework; path = $LIB_PATH/SecureLogAPI/$CONFIGURATION/SecureLogAPI.framework; sourceTree = "<group>"; };
+		4DB0769D2DA61E1D006A0C70 /* intermediate_cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = intermediate_cert.cer; path = idcloudclientsample/resources/intermediate_cert.cer; sourceTree = "<group>"; };
+		4DB0769F2DA61E22006A0C70 /* intermediate_cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = intermediate_cert.cer; path = idcloudclientsample/resources/intermediate_cert.cer; sourceTree = "<group>"; };
 		6190F9C4F3297AC42D789867 /* Pods-Advanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Advanced.release.xcconfig"; path = "Target Support Files/Pods-Advanced/Pods-Advanced.release.xcconfig"; sourceTree = "<group>"; };
 		97E4C762BB56A3F702732A13 /* Pods_Advanced.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Advanced.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12775FF252C436900ACABE8 /* SecureLogArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureLogArchive.swift; sourceTree = "<group>"; };
@@ -173,6 +175,8 @@
 		1153749F25185800007BBA01 = {
 			isa = PBXGroup;
 			children = (
+				4DB0769D2DA61E1D006A0C70 /* intermediate_cert.cer */,
+				4DB0769F2DA61E22006A0C70 /* intermediate_cert.cer */,
 				D9C3773F27A2F96500176FE6 /* GettingStarted.entitlements */,
 				D9ABA4052587B7A900119525 /* Advanced.entitlements */,
 				1153754825199B0C007BBA01 /* xcconfig */,
@@ -433,7 +437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC8BFE1C2CCF5C5D007F77D0 /* root_cert.cer in Resources */,
+				4DB076A02DA61E23006A0C70 /* intermediate_cert.cer in Resources */,
 				115374D325188801007BBA01 /* Assets.xcassets in Resources */,
 				D923FC6E251BAACD00841F46 /* Localizable.strings in Resources */,
 			);
@@ -443,7 +447,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC8BFE1D2CCF5C5D007F77D0 /* root_cert.cer in Resources */,
+				4DB0769E2DA61E1D006A0C70 /* intermediate_cert.cer in Resources */,
 				D968C6E32524E4BF008AEEE6 /* Assets.xcassets in Resources */,
 				D923FC6F251BAACD00841F46 /* Localizable.strings in Resources */,
 			);
@@ -460,9 +464,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -521,9 +529,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Advanced/Pods-Advanced-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Advanced/Pods-Advanced-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
